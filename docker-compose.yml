@@ -1,0 +1,22 @@
+
+services:
+  mongo:
+    image: mongodb/mongodb-community-server:latest
+    volumes:
+      - ./store/configdb:/data/configdb
+      - ./store/db:/data/db
+    ports:
+      - "27017:27017"
+    user: root
+  payload:
+    build: ./payload
+    ports:
+      - "3000:3000"
+  # website:
+  #   image: node:24
+  #   working_dir: /app/website
+  #   volumes:
+  #     - ./website:/app/website
+  #   command: npm run dev
+  #   ports:
+  #     - "4321:4321"
