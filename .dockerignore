@@ -1,0 +1,10 @@
+node_modules/
+
+.astro/
+payload/.next/
+.next/
+deploy-website/
+
+upload/
+dist/
+store/
