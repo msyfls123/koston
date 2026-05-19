@@ -12,11 +12,13 @@ services:
     build: ./payload
     ports:
       - "3000:3000"
-  # website:
-  #   image: node:24
-  #   working_dir: /app/website
-  #   volumes:
-  #     - ./website:/app/website
-  #   command: npm run dev
-  #   ports:
-  #     - "4321:4321"
+    environment:
+      DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
+      PAYLOAD_SECRET: KIMIMA
+  website:
+    build: ./
+    ports:
+      - "4321:4321"
+    environment:
+      DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
+      PAYLOAD_SECRET: KIMIMA

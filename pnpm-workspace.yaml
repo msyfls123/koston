@@ -4,3 +4,14 @@ packages:
 
 ignoredBuiltDependencies:
   - esbuild
+injectWorkspacePackages: true
+dangerouslyAllowAllBuilds: all
+supportedArchitectures:
+  os:
+  - linux
+  - current
+  cpu:
+  - x64
+  libc:
+  - musl
+  - glibc

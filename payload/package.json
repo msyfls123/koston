@@ -22,6 +22,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@img/sharp-linuxmusl-x64": "^0.34.5",
     "@payloadcms/db-mongodb": "3.11.0",
     "@payloadcms/next": "3.11.0",
     "@payloadcms/richtext-lexical": "3.11.0",

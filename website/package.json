@@ -9,14 +9,17 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/node": "^9.0.0",
+    "@astrojs/node": "10.1.1",
     "@astrojs/react": "^5.0.0",
+    "@img/sharp-linuxmusl-x64": "^0.34.5",
+    "@img/sharp-win32-x64": "^0.34.5",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro": "^6.0.5",
+    "astro": "6.3.3",
     "payload": "3.11.0",
     "payload-app": "workspace:*",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "sharp": "^0.34.5"
   }
 }
