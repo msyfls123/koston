@@ -6,8 +6,8 @@ export const Product: CollectionConfig = {
     plural: { product: '产品' },
     singular: { product: '产品' },
    },
-   // @ts-ignore
    orderable: true,
+   defaultSort: 'createdAt',
    fields: [
     {
         name: 'name',
