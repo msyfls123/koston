@@ -12,6 +12,8 @@ services:
     build: ./payload
     ports:
       - "3000:3000"
+    volumes:
+      - ./payload/upload:/app/upload
     environment:
       DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
       PAYLOAD_SECRET: KIMIMA

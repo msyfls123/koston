@@ -13,6 +13,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    product: Product;
     posts: Post;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -22,6 +23,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    product: ProductSelect<false> | ProductSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -123,6 +125,53 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product".
+ */
+export interface Product {
+  id: string;
+  name?: string | null;
+  engName?: string | null;
+  introduction?: string | null;
+  section?:
+    | {
+        name?: string | null;
+        engName?: string | null;
+        content: (
+          | {
+              text?: string | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'pureText';
+            }
+          | {
+              text?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              id?: string | null;
+              blockName?: string | null;
+              blockType: 'richText';
+            }
+        )[];
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -145,6 +194,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'product';
+        value: string | Product;
       } | null)
     | ({
         relationTo: 'posts';
@@ -258,6 +311,42 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product_select".
+ */
+export interface ProductSelect<T extends boolean = true> {
+  name?: T;
+  engName?: T;
+  introduction?: T;
+  section?:
+    | T
+    | {
+        name?: T;
+        engName?: T;
+        content?:
+          | T
+          | {
+              pureText?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              richText?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
