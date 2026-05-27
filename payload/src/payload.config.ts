@@ -1,5 +1,5 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor, EXPERIMENTAL_TableFeature } from '@payloadcms/richtext-lexical'
+import { lexicalEditor, EXPERIMENTAL_TableFeature, UploadFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -9,7 +9,10 @@ import { zh } from '@payloadcms/translations/languages/zh'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-import { Product } from './collections/Product'
+import { Products } from './collections/Products'
+import { Industries } from './collections/Industries'
+
+import { IndustryImages, RichTextImages } from './collections/media/index'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,7 +34,10 @@ export default buildConfig({
   collections: [
     Users,
     Media,
-    Product,
+    Products,
+    Industries,
+    IndustryImages,
+    RichTextImages,
     {
       slug: 'posts',
       fields: [
@@ -47,7 +53,10 @@ export default buildConfig({
   editor: lexicalEditor({
     'features': ({ defaultFeatures }) => ([
       ...defaultFeatures,
-      EXPERIMENTAL_TableFeature()
+      EXPERIMENTAL_TableFeature(),
+      UploadFeature({
+        enabledCollections: ['richtext-images'],
+      })
     ])
   }),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -1,0 +1,18 @@
+---
+import { getPayload } from 'payload'
+import { config, getStaticUrl, MediaSubDir } from 'payload-app'
+
+const payload = await getPayload({ config })
+
+const industries = await payload.find({ collection: 'industries'})
+
+---
+<div>total: {industries.totalDocs}</div>
+<ul>
+    {industries.docs.map((doc) => (
+        <li>
+            <p>name: {doc.name}</p>
+            { typeof doc.thumbnail === 'object' && <img src={getStaticUrl(MediaSubDir.IndustryImages, doc.thumbnail?.filename ?? '')} /> }
+        </li>
+    ))}
+</ul>

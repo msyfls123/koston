@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import { config } from 'payload-app'
 import Welcome from '../components/Welcome.astro'
 import Layout from '../layouts/Layout.astro'
+import Industries from '../components/Industries.astro'
 
 const payload = await getPayload({ config })
 
@@ -13,4 +14,5 @@ const posts = await payload.find({ collection: 'posts', sort: 'createdAt' })
 
 <Layout>
   <Welcome posts={posts} />
+  <Industries />
 </Layout>

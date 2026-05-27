@@ -17,6 +17,7 @@ services:
     environment:
       DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
       PAYLOAD_SECRET: KIMIMA
+      IN_DOCKER: 1
   website:
     build: ./
     ports:
@@ -24,3 +25,4 @@ services:
     environment:
       DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
       PAYLOAD_SECRET: KIMIMA
+      IN_DOCKER: 1
