@@ -7,6 +7,10 @@ export const getUploadDir = (subdir: string) => path.join(UPLOAD_BASE_DIR, subdi
 export enum MediaSubDir {
     IndustryImages = 'industry-images',
     RichTextImages = 'richtext-images',
+    BannerImages = 'banner-images',
+    TimelineImages = 'timeline-images',
+    HonorBanner = 'honor-banner',
+    AwardImages = 'award-images',
 }
 
 const normalize = (url: string) => url.replace(/\\/g, '/')

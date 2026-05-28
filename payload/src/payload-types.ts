@@ -73,6 +73,10 @@ export interface Config {
     industries: Industry;
     'industry-images': IndustryImage;
     'richtext-images': RichtextImage;
+    'banner-images': BannerImage;
+    'timeline-images': TimelineImage;
+    'honor-banner': HonorBanner;
+    'award-images': AwardImage;
     posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -87,6 +91,10 @@ export interface Config {
     industries: IndustriesSelect<false> | IndustriesSelect<true>;
     'industry-images': IndustryImagesSelect<false> | IndustryImagesSelect<true>;
     'richtext-images': RichtextImagesSelect<false> | RichtextImagesSelect<true>;
+    'banner-images': BannerImagesSelect<false> | BannerImagesSelect<true>;
+    'timeline-images': TimelineImagesSelect<false> | TimelineImagesSelect<true>;
+    'honor-banner': HonorBannerSelect<false> | HonorBannerSelect<true>;
+    'award-images': AwardImagesSelect<false> | AwardImagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -97,8 +105,26 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    innovation: Innovation;
+    sustainable: Sustainable;
+    about: About;
+    careers: Career;
+    honorsAndQualifications: HonorsAndQualification;
+    partnship: Partnship;
+    online: Online;
+    banners: Banner;
+  };
+  globalsSelect: {
+    innovation: InnovationSelect<false> | InnovationSelect<true>;
+    sustainable: SustainableSelect<false> | SustainableSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
+    careers: CareersSelect<false> | CareersSelect<true>;
+    honorsAndQualifications: HonorsAndQualificationsSelect<false> | HonorsAndQualificationsSelect<true>;
+    partnship: PartnshipSelect<false> | PartnshipSelect<true>;
+    online: OnlineSelect<false> | OnlineSelect<true>;
+    banners: BannersSelect<false> | BannersSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -345,6 +371,122 @@ export interface RichtextImage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banner-images".
+ */
+export interface BannerImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline-images".
+ */
+export interface TimelineImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "honor-banner".
+ */
+export interface HonorBanner {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "award-images".
+ */
+export interface AwardImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts".
  */
 export interface Post {
@@ -400,6 +542,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'richtext-images';
         value: string | RichtextImage;
+      } | null)
+    | ({
+        relationTo: 'banner-images';
+        value: string | BannerImage;
+      } | null)
+    | ({
+        relationTo: 'timeline-images';
+        value: string | TimelineImage;
+      } | null)
+    | ({
+        relationTo: 'honor-banner';
+        value: string | HonorBanner;
+      } | null)
+    | ({
+        relationTo: 'award-images';
+        value: string | AwardImage;
       } | null)
     | ({
         relationTo: 'posts';
@@ -631,6 +789,134 @@ export interface RichtextImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banner-images_select".
+ */
+export interface BannerImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timeline-images_select".
+ */
+export interface TimelineImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "honor-banner_select".
+ */
+export interface HonorBannerSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "award-images_select".
+ */
+export interface AwardImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -677,6 +963,354 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "innovation".
+ */
+export interface Innovation {
+  id: string;
+  introduction?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sustainable".
+ */
+export interface Sustainable {
+  id: string;
+  introduction?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: string;
+  sections?:
+    | {
+        title?: string | null;
+        engTitle?: string | null;
+        content?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  numbers?:
+    | {
+        number?: string | null;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  timeline?:
+    | {
+        year?: string | null;
+        events?:
+          | {
+              event?: string | null;
+              picture?: (string | null) | TimelineImage;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "careers".
+ */
+export interface Career {
+  id: string;
+  talents?: string | null;
+  benefits?: string | null;
+  jobs?:
+    | {
+        title?: string | null;
+        description?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "honorsAndQualifications".
+ */
+export interface HonorsAndQualification {
+  id: string;
+  overview?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  banner?: (string | null) | HonorBanner;
+  awards?:
+    | {
+        title?: string | null;
+        description?: string | null;
+        picture?: (string | null) | AwardImage;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnship".
+ */
+export interface Partnship {
+  id: string;
+  notice?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "online".
+ */
+export interface Online {
+  id: string;
+  workingTime?: string | null;
+  hotline?: string | null;
+  link1688?: string | null;
+  linkQianniu?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners".
+ */
+export interface Banner {
+  id: string;
+  'product-category'?: (string | null) | BannerImage;
+  'industry-category'?: (string | null) | BannerImage;
+  'star-products'?: (string | null) | BannerImage;
+  innovation?: (string | null) | BannerImage;
+  sustainable?: (string | null) | BannerImage;
+  about?: (string | null) | BannerImage;
+  careers?: (string | null) | BannerImage;
+  'news-and-information'?: (string | null) | BannerImage;
+  'honors-and-qualifications'?: (string | null) | BannerImage;
+  'online-service'?: (string | null) | BannerImage;
+  'online-support'?: (string | null) | BannerImage;
+  partnership?: (string | null) | BannerImage;
+  resouces?: (string | null) | BannerImage;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "innovation_select".
+ */
+export interface InnovationSelect<T extends boolean = true> {
+  introduction?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sustainable_select".
+ */
+export interface SustainableSelect<T extends boolean = true> {
+  introduction?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        title?: T;
+        engTitle?: T;
+        content?: T;
+        id?: T;
+      };
+  numbers?:
+    | T
+    | {
+        number?: T;
+        caption?: T;
+        id?: T;
+      };
+  timeline?:
+    | T
+    | {
+        year?: T;
+        events?:
+          | T
+          | {
+              event?: T;
+              picture?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "careers_select".
+ */
+export interface CareersSelect<T extends boolean = true> {
+  talents?: T;
+  benefits?: T;
+  jobs?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "honorsAndQualifications_select".
+ */
+export interface HonorsAndQualificationsSelect<T extends boolean = true> {
+  overview?: T;
+  banner?: T;
+  awards?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        picture?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnship_select".
+ */
+export interface PartnshipSelect<T extends boolean = true> {
+  notice?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "online_select".
+ */
+export interface OnlineSelect<T extends boolean = true> {
+  workingTime?: T;
+  hotline?: T;
+  link1688?: T;
+  linkQianniu?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners_select".
+ */
+export interface BannersSelect<T extends boolean = true> {
+  'product-category'?: T;
+  'industry-category'?: T;
+  'star-products'?: T;
+  innovation?: T;
+  sustainable?: T;
+  about?: T;
+  careers?: T;
+  'news-and-information'?: T;
+  'honors-and-qualifications'?: T;
+  'online-service'?: T;
+  'online-support'?: T;
+  partnership?: T;
+  resouces?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

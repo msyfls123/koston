@@ -12,7 +12,10 @@ import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Industries } from './collections/Industries'
 
-import { IndustryImages, RichTextImages } from './collections/media/index'
+import { AwardImages, BannerImages, HonorBanner, IndustryImages, RichTextImages } from './collections/media/index'
+import { StaticPages } from './globals/StaticPages'
+import { TimelineImages } from './collections/media/TimelineImages'
+import { StaticConfigs } from './globals/StaticConfigs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,6 +34,10 @@ export default buildConfig({
       zh,
     },
   },
+  globals: [
+    ...StaticPages,
+    ...StaticConfigs,
+  ],
   collections: [
     Users,
     Media,
@@ -38,6 +45,10 @@ export default buildConfig({
     Industries,
     IndustryImages,
     RichTextImages,
+    BannerImages,
+    TimelineImages,
+    HonorBanner,
+    AwardImages,
     {
       slug: 'posts',
       fields: [
