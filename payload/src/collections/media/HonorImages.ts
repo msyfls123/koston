@@ -1,6 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { getUploadDir, MediaSubDir } from "./base";
-import { label } from "@/libs/utils";
+import { label } from "../../libs/utils";
 
 export const HonorBanner: CollectionConfig = {
     slug: MediaSubDir.HonorBanner,

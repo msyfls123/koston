@@ -12,10 +12,15 @@ import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Industries } from './collections/Industries'
 
-import { AwardImages, BannerImages, HonorBanner, IndustryImages, RichTextImages } from './collections/media/index'
+import { AwardImages, BannerImages, HonorBanner, IndustryImages, ResourceFiles, RichTextImages } from './collections/media/index'
 import { StaticPages } from './globals/StaticPages'
 import { TimelineImages } from './collections/media/TimelineImages'
 import { StaticConfigs } from './globals/StaticConfigs'
+import { News } from './collections/News'
+import { Partners } from './collections/Partners'
+import { Resources } from './collections/Resources'
+import { Supports } from './collections/Supports'
+import { label } from './libs/utils'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,6 +31,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    timezones: {
+      defaultTimezone: 'Asia/Shanghai',
+    }
   },
   i18n: {
     fallbackLanguage: 'zh',
@@ -40,17 +48,25 @@ export default buildConfig({
   ],
   collections: [
     Users,
-    Media,
+    /** collections **/
     Products,
     Industries,
+    News,
+    Partners,
+    Resources,
+    Supports,
+    /** images **/
     IndustryImages,
     RichTextImages,
     BannerImages,
     TimelineImages,
     HonorBanner,
     AwardImages,
+    /** files **/
+    ResourceFiles,
     {
       slug: 'posts',
+      labels: label('示例 Posts'),
       fields: [
         {
           name: 'title',

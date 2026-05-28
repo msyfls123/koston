@@ -5,6 +5,8 @@ import { loadEnv } from 'payload/node'
 
 import react from '@astrojs/react';
 
+import tailwindcss from '@tailwindcss/vite';
+
 loadEnv()
 
 export default defineConfig({
@@ -15,4 +17,9 @@ export default defineConfig({
   }),
 
   integrations: [react()],
+
+  vite: {
+    // @ts-ignore
+    plugins: [tailwindcss()],
+  },
 })

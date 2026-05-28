@@ -1,0 +1,18 @@
+---
+import { getPayload } from 'payload'
+import { config, convertRichText } from 'payload-app'
+
+const payload = await getPayload({ config })
+
+const news = await payload.find({ collection: 'news' })
+
+---
+<div>total: {news.totalDocs}</div>
+<ul>
+    {news.docs.map((doc) => (
+        <li>
+            <p>title: {doc.title}</p>
+            { doc.content?.root && <div class="w-200" set:html={convertRichText(doc.content)}></div> }
+        </li>
+    ))}
+</ul>

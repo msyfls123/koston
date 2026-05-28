@@ -1,6 +1,6 @@
-import { MediaSubDir } from '@/collections/media/base'
+import { MediaSubDir } from '../collections/media/base'
 
-import { label } from '@/libs/utils'
+import { label } from '../libs/utils'
 import { type GlobalConfig } from 'payload'
 
 export const StaticPages: GlobalConfig[] = [

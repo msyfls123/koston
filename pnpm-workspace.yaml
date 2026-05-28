@@ -4,7 +4,8 @@ packages:
 
 ignoredBuiltDependencies:
   - esbuild
-injectWorkspacePackages: true
+
+linkWorkspacePackages: true
 dangerouslyAllowAllBuilds: all
 supportedArchitectures:
   os:

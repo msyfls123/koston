@@ -1,7 +1,7 @@
 
 import { type GlobalConfig } from 'payload'
-import { BannerPages, PageNameMap } from '@/libs/consts'
-import { MediaSubDir } from '@/collections/media/base'
+import { BannerPages, PageNameMap } from '../libs/consts'
+import { MediaSubDir } from '../collections/media/base'
 
 export const StaticConfigs: GlobalConfig[] = [
   {
