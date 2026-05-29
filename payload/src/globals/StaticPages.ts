@@ -174,7 +174,7 @@ export const StaticPages: GlobalConfig[] = [
     ]
   },
   {
-    slug: 'honorsAndQualifications',
+    slug: 'merits',
     label: '荣誉资质认证',
     fields: [
       {

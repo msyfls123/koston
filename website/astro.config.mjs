@@ -19,6 +19,14 @@ export default defineConfig({
   integrations: [react()],
 
   vite: {
+    optimizeDeps: {
+      include: ['react-dom/client'],
+    },
+    build: {
+      commonjsOptions: {
+        include: [/react-dom\/client/, /node_modules/],
+      },
+    },
     // @ts-ignore
     plugins: [tailwindcss()],
   },

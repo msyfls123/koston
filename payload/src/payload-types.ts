@@ -118,7 +118,7 @@ export interface Config {
     sustainable: Sustainable;
     about: About;
     careers: Career;
-    honorsAndQualifications: HonorsAndQualification;
+    merits: Merit;
     partnship: Partnship;
     online: Online;
     banners: Banner;
@@ -128,7 +128,7 @@ export interface Config {
     sustainable: SustainableSelect<false> | SustainableSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     careers: CareersSelect<false> | CareersSelect<true>;
-    honorsAndQualifications: HonorsAndQualificationsSelect<false> | HonorsAndQualificationsSelect<true>;
+    merits: MeritsSelect<false> | MeritsSelect<true>;
     partnship: PartnshipSelect<false> | PartnshipSelect<true>;
     online: OnlineSelect<false> | OnlineSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
@@ -1173,9 +1173,9 @@ export interface Career {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "honorsAndQualifications".
+ * via the `definition` "merits".
  */
-export interface HonorsAndQualification {
+export interface Merit {
   id: string;
   overview?: {
     root: {
@@ -1340,9 +1340,9 @@ export interface CareersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "honorsAndQualifications_select".
+ * via the `definition` "merits_select".
  */
-export interface HonorsAndQualificationsSelect<T extends boolean = true> {
+export interface MeritsSelect<T extends boolean = true> {
   overview?: T;
   banner?: T;
   awards?:

@@ -11,7 +11,8 @@
     "dev:payload": "cd payload && pnpm dev",
     "dev:website": "cd website && pnpm dev",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "repay": "pnpm i \"payload-app@workspace:*\" --filter astro-website"
+    "repay": "pnpm i \"payload-app@workspace:*\" --filter astro-website",
+    "add": "pnpm -r -filter astro-website exec shadcn add --"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

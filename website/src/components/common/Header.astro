@@ -1,0 +1,8 @@
+---
+import { Nav } from './Nav'
+
+const routePattern = Astro.routePattern
+---
+<p>{routePattern}</p>
+<Nav client:load />
+

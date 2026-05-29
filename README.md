@@ -1,9 +1,9 @@
 # 数据结构
 
 - [x] News 新闻
-- [ ] Partner 在线加盟
-- [ ] Resources 资源下载
-- [ ] Support 在线客服
+- [x] Partner 在线加盟
+- [x] Resources 资源下载
+- [x] Support 在线客服
 
 # 路由
 
