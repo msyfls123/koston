@@ -22,3 +22,6 @@
 - [ ] footer
 - [ ] banner
 - [ ] home
+
+# 参考资料
+- Mongodb 加密：https://oneuptime.com/blog/post/2026-01-16-docker-mongodb-auth-volumes/view#connecting-to-mongodb

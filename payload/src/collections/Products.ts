@@ -15,7 +15,8 @@ export const Products: CollectionConfig = {
         {
             name: 'name',
             label: '产品名',
-            type: 'text'
+            type: 'text',
+            index: true,
         },
         {
             name: 'engName',
@@ -24,7 +25,7 @@ export const Products: CollectionConfig = {
         },
         {
             name: 'introduction',
-            label: "产品英文名介绍",
+            label: "产品介绍",
             type: 'textarea'
         },
         {

@@ -21,7 +21,8 @@ export const Industries: CollectionConfig = {
                                 {
                                     name: 'name',
                                     label: '行业名',
-                                    type: 'text'
+                                    type: 'text',
+                                    index: true,
                                 },
                                 {
                                     name: 'engName',

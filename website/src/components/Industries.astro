@@ -4,7 +4,11 @@ import { config, getStaticUrl, MediaSubDir } from 'payload-app'
 
 const payload = await getPayload({ config })
 
-const industries = await payload.find({ collection: 'industries'})
+const industries = await payload.find({ collection: 'industries', where: {
+  name: {
+    like: '尖'
+  }
+}})
 
 ---
 <div>total: {industries.totalDocs}</div>
