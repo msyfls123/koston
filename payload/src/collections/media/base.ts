@@ -1,5 +1,10 @@
 import path from 'path'
 
+type ImageWithSizes = {
+  filename?: string | null
+  sizes?: Record<string, { filename?: string | null } | undefined> | null
+}
+
 export const UPLOAD_BASE_DIR = path.join('upload')
 
 export const getUploadDir = (subdir: string) => path.join(UPLOAD_BASE_DIR, subdir)
@@ -12,6 +17,7 @@ export enum MediaSubDir {
     HonorBanner = 'honor-banner',
     AwardImages = 'award-images',
     ResourceFiles = 'resource-files',
+    StarProductImages = 'star-product-images'
 }
 
 const normalize = (url: string) => url.replace(/\\/g, '/')
@@ -25,4 +31,11 @@ export const getStaticUrl = (subdir: string, fileName: string) => {
         process.env.IN_DOCKER ? path.join('/', staticPath)
                               : new URL(`/api/${subdir}/file/${fileName}`, 'http://localhost:3000').href
     )
+}
+
+export const getCertainSizeImageName = (fileData: ImageWithSizes | null | undefined, sizeName: string) => {
+  if (!fileData) return ''
+  const targetSize = fileData.sizes?.[sizeName]
+  if (targetSize?.filename) return targetSize.filename
+  return fileData.filename ?? ''
 }

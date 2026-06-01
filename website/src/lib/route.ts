@@ -1,4 +1,4 @@
-enum RouteCategory {
+export enum RouteCategory {
   Home = 'home',
   Products = 'products',
   Industries = 'industries',

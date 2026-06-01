@@ -1,28 +1,26 @@
 import type { CollectionConfig } from "payload";
 import { getUploadDir, MediaSubDir } from "./base";
+import { label } from "../../libs/utils";
 
-export const IndustryImages: CollectionConfig = {
-    slug: MediaSubDir.IndustryImages,
-    labels: {
-        singular: '行业封面图',
-        plural: '行业封面图'
-    },
+export const StarProductImages: CollectionConfig = {
+    slug: MediaSubDir.StarProductImages,
+    labels: label('明星产品封面图'),
     admin: {
         hidden: true
     },
     upload: {
-        staticDir: getUploadDir(MediaSubDir.IndustryImages),
+        staticDir: getUploadDir(MediaSubDir.StarProductImages),
         imageSizes: [
             {
-                name: 'square',
-                width: 800,
-                height: 800,
+                name: 'top',
+                width: 1100,
+                height: 750,
                 position: 'centre'
             },
             {
-              name: 'thumbnail',
-              width: 350,
-              height: 150,
+              name: 'normal',
+              width: 1040,
+              height: 460,
               position: 'centre'
             }
         ],

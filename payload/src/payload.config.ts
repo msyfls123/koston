@@ -12,7 +12,7 @@ import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Industries } from './collections/Industries'
 
-import { AwardImages, BannerImages, HonorBanner, IndustryImages, ResourceFiles, RichTextImages } from './collections/media/index'
+import { AwardImages, BannerImages, HonorBanner, IndustryImages, ResourceFiles, RichTextImages, StarProductImages } from './collections/media/index'
 import { StaticPages } from './globals/StaticPages'
 import { TimelineImages } from './collections/media/TimelineImages'
 import { StaticConfigs } from './globals/StaticConfigs'
@@ -21,6 +21,8 @@ import { Partners } from './collections/Partners'
 import { Resources } from './collections/Resources'
 import { Supports } from './collections/Supports'
 import { label } from './libs/utils'
+import { StarProducts } from './collections/StarProducts'
+import { ProductCategories } from './collections/ProductCategories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,6 +57,8 @@ export default buildConfig({
     Partners,
     Resources,
     Supports,
+    StarProducts,
+    ProductCategories,
     /** images **/
     IndustryImages,
     RichTextImages,
@@ -62,6 +66,7 @@ export default buildConfig({
     TimelineImages,
     HonorBanner,
     AwardImages,
+    StarProductImages,
     /** files **/
     ResourceFiles,
     {
