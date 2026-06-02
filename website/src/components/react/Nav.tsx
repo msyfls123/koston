@@ -20,6 +20,7 @@ const NavPanelMap: Record<RouteCategory, React.ComponentType> = {
 export const Nav = ({ routePattern }: INavProps) => {
   const foundCategory = useMemo(() => findRouteCategory(routePattern), [routePattern])
   const [selectedNav, setSelectedNav] = useState<RouteCategory | null>(null)
+  const forceOpen = useRef(false)
   const openTimerRef = useRef(0)
   const closeTimerRef = useRef(0)
   const isPointerDownOnContentRef = useRef(false)
@@ -32,15 +33,19 @@ export const Nav = ({ routePattern }: INavProps) => {
     }, 300)
   }, [])
 
-  const handleClose = useCallback(() => {
+  const handleClose = useCallback((instant = false) => {
     clearTimeout(openTimerRef.current)
-    if (!isPointerDownOnContentRef.current) {
-      closeTimerRef.current = window.setTimeout(() => setSelectedNav(null), 300)
+    if (!isPointerDownOnContentRef.current && !forceOpen.current) {
+      closeTimerRef.current = window.setTimeout(() => setSelectedNav(null), instant ? 0 : 300)
     }
   }, [])
 
   useEffect(() => {
     const handlePointerUp = () => {
+      if (!isPointerDownOnContentRef.current && forceOpen.current) {
+        forceOpen.current = false
+        handleClose(true)
+      }
       isPointerDownOnContentRef.current = false
     }
     document.addEventListener('pointerup', handlePointerUp)
@@ -76,6 +81,10 @@ export const Nav = ({ routePattern }: INavProps) => {
               }}
               onPointerLeave={() => {
                 handleClose()
+              }}
+              onPointerDown={() => {
+                forceOpen.current = true
+                isPointerDownOnContentRef.current = true
               }}
             >
               <span className='text-base leading-none'>{nav.name}</span>
