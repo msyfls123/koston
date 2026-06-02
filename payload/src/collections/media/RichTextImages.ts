@@ -1,7 +1,8 @@
 import type { CollectionConfig } from "payload";
-import { getUploadDir } from "./base";
+import { BaseImageConfig, getUploadDir } from "./base";
 
 export const RichTextImages: CollectionConfig = {
+    ...BaseImageConfig,
     slug: 'richtext-images',
     access: {
         read: () => true,

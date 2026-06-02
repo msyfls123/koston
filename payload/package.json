@@ -9,6 +9,11 @@
       "import": "./src/index.ts",
       "types": "./src/index.ts",
       "default": "./src/index.ts"
+    },
+    "./consts": {
+      "import": "./src/consts.ts",
+      "types": "./src/consts.ts",
+      "default": "./src/consts.ts"
     }
   },
   "scripts": {

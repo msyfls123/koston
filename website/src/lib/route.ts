@@ -1,3 +1,5 @@
+import { PageType } from "payload-app/consts"
+
 export enum RouteCategory {
   Home = 'home',
   Products = 'products',
@@ -7,35 +9,55 @@ export enum RouteCategory {
   Profile = 'profile'
 }
 
+export const AllRoutes = {
+  [PageType.ProductCategory]: '/product/',
+  [PageType.ProductDetail]: '/product/[id]',
+  [PageType.IndustryCategory]: '/industry/',
+  [PageType.IndustryDetail]: '/industry/[id]',
+  [PageType.StarProducts]: '/product/stars',
+  [PageType.OnlineSupport]: '/service/support',
+  [PageType.OnlineService]: '/service/contact',
+  [PageType.Partnership]: '/service/partner',
+  [PageType.Resources]: '/service/resources',
+  [PageType.Innovation]: '/innovation',
+  [PageType.Sustainable]: '/sustainable',
+  [PageType.About]: '/about',
+  [PageType.Merits]: '/merits',
+  [PageType.NewsList]: '/news',
+  [PageType.NewsDetail]: '/news/[id]',
+  [PageType.Careers]: '/careers',
+  [PageType.Home]: '/'
+}
+
 export const RoutesMap = {
-  [RouteCategory.Home]: '/',
+  [RouteCategory.Home]: AllRoutes[PageType.Home],
   [RouteCategory.Products]: {
-    LIST: '/product/',
-    DETAIL: '/product/[id]',
-    STARS: '/product/stars'
+    LIST: AllRoutes[PageType.ProductCategory],
+    DETAIL: AllRoutes[PageType.ProductDetail],
+    STARS: AllRoutes[PageType.StarProducts]
   },
   [RouteCategory.Industries]: {
-    LIST: '/industry/',
-    DETAIL: '/industry/[id]'
+    LIST: AllRoutes[PageType.IndustryCategory],
+    DETAIL: AllRoutes[PageType.IndustryDetail]
   },
   [RouteCategory.Service]: {
-    SUPPORT: '/service/support',
-    CONTACT: '/service/contact',
-    PARTNER: '/service/partner',
-    RESOURCES: '/service/resources',
+    SUPPORT: AllRoutes[PageType.OnlineSupport],
+    CONTACT: AllRoutes[PageType.OnlineService],
+    PARTNER: AllRoutes[PageType.Partnership],
+    RESOURCES: AllRoutes[PageType.Resources],
   },
   [RouteCategory.Advance]: {
-    INNOVATION: '/innovation',
-    SUSTAINABLE: '/sustainable',
+    INNOVATION: AllRoutes[PageType.Innovation],
+    SUSTAINABLE: AllRoutes[PageType.Sustainable],
   },
   [RouteCategory.Profile]: {
-    ABOUT: '/about',
-    MERITS: '/merits',
+    ABOUT: AllRoutes[PageType.About],
+    MERITS: AllRoutes[PageType.Merits],
     NEWS: {
-      LIST: '/news',
-      DETAIL: '/news/[id]'
+      LIST: AllRoutes[PageType.NewsList],
+      DETAIL: AllRoutes[PageType.NewsDetail]
     },
-    CAREERS: '/careers'
+    CAREERS: AllRoutes[PageType.Careers]
   }
 }
 

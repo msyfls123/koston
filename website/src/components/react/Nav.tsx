@@ -2,7 +2,7 @@
 import { findRouteCategory, HeaderNavs, RouteCategory } from '@/lib/route'
 import { cn } from '@/lib/utils'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ProductsPanel } from './NavPanel'
+import { AdvancePanel, IndustriesPanel, ProductsPanel, ServicePanel, ProfilePanel } from './NavPanel'
 
 interface INavProps {
   routePattern: string
@@ -11,10 +11,10 @@ interface INavProps {
 const NavPanelMap: Record<RouteCategory, React.ComponentType> = {
   [RouteCategory.Home]: () => null,
   [RouteCategory.Products]: ProductsPanel,
-  [RouteCategory.Industries]: ProductsPanel,
-  [RouteCategory.Service]: ProductsPanel,
-  [RouteCategory.Advance]: ProductsPanel,
-  [RouteCategory.Profile]: ProductsPanel,
+  [RouteCategory.Industries]: IndustriesPanel,
+  [RouteCategory.Service]: ServicePanel,
+  [RouteCategory.Advance]: AdvancePanel,
+  [RouteCategory.Profile]: ProfilePanel,
 }
 
 export const Nav = ({ routePattern }: INavProps) => {
@@ -67,7 +67,7 @@ export const Nav = ({ routePattern }: INavProps) => {
           {HeaderNavs.map((nav) => (
             <nav
               key={nav.category}
-              className={cn(' flex justify-center items-center h-full', {
+              className={cn('cursor-pointer flex justify-center items-center h-full', {
                 'text-[#c90018]': foundCategory === nav.category
               })}
               onPointerEnter={() => {
@@ -88,7 +88,7 @@ export const Nav = ({ routePattern }: INavProps) => {
     
     {selectedNav && <>
       <div
-        className='absolute top-23 bg-white w-full pt-12 pb-16'
+        className='absolute top-23 bg-white w-full pt-7 pb-16'
         onPointerEnter={() => {
           handleOpen(selectedNav)
         }}

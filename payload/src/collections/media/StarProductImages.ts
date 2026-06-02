@@ -1,8 +1,9 @@
 import type { CollectionConfig } from "payload";
-import { getUploadDir, MediaSubDir } from "./base";
+import { BaseImageConfig, getUploadDir, MediaSubDir } from "./base";
 import { label } from "../../libs/utils";
 
 export const StarProductImages: CollectionConfig = {
+    ...BaseImageConfig,
     slug: MediaSubDir.StarProductImages,
     labels: label('明星产品封面图'),
     admin: {

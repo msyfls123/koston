@@ -8,6 +8,9 @@ export const StarProducts: CollectionConfig = {
   admin: {
     useAsTitle: 'name'
   },
+  access: {
+    read: () => true
+  },
   defaultSort: 'createdAt',
   fields: [
     {

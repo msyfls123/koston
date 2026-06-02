@@ -1,10 +1,12 @@
 ---
 import BaseLayout from "./BaseLayout.astro"
 import Header from "../components/common/Header.astro"
+import Footer from "../components/common/Footer.astro"
 ---
 <BaseLayout>
-<Header />
-<main class='max-w-320 mx-auto'>
-  <slot />
-</main>
+  <Header />
+  <main class='max-w-320 mx-auto flex-1'>
+    <slot />
+  </main>
+  <Footer />
 </BaseLayout>

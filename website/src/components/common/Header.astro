@@ -1,7 +1,9 @@
 ---
 import { Nav } from '@/components/react/Nav'
 import { getPayload } from 'payload'
-import { config, getStaticUrl, MediaSubDir, getCertainSizeImageName } from 'payload-app'
+import { config, getStaticUrl, MediaSubDir, getCertainSizeImageName, type BannerImage } from 'payload-app'
+
+import { BannerPages } from 'payload-app/consts'
 import { NavProvider } from '@/components/context/NavContext'
 
 const payload = await getPayload({ config })
@@ -9,6 +11,7 @@ const payload = await getPayload({ config })
 const categories = await payload.find({ collection: 'product-categories' })
 const industries = await payload.find({ collection: 'industries' })
 const stars = await payload.find({ collection: 'star-products' })
+const banners = await payload.findGlobal({ slug: 'banners'})
 
 const productCategories = categories.docs.slice(0, 6).map((item) => ({
   id: item.id,
@@ -16,7 +19,8 @@ const productCategories = categories.docs.slice(0, 6).map((item) => ({
 }))
 const topIndustries = industries.docs.map((item) => ({
   id: item.id,
-  name: item.name ?? ''
+  name: item.name ?? '',
+  cover: typeof item.thumbnail === 'object' ? getStaticUrl(MediaSubDir.IndustryImages, getCertainSizeImageName(item.thumbnail, 'normal')) : ''
 }))
 const starProducts = stars.docs.map((item) => ({
   id: item.id,
@@ -24,11 +28,24 @@ const starProducts = stars.docs.map((item) => ({
   cover: typeof item.cover === 'object' ? getStaticUrl(MediaSubDir.StarProductImages, getCertainSizeImageName(item.cover, 'normal')) : ''
 }))
 
+const normalizeBanners = Object.fromEntries(BannerPages.map((pageType) => {
+  // @ts-ignore
+  const foundBanner = banners[pageType] as BannerImage
+  if (!foundBanner || !foundBanner.filename) return [pageType, null]
+  const normal = getStaticUrl(MediaSubDir.BannerImages, foundBanner.filename ?? '')
+  const cropped = getStaticUrl(MediaSubDir.BannerImages, getCertainSizeImageName(foundBanner, 'cropped'))
+  return [
+    pageType,
+    { normal, cropped }
+  ]
+}))
+
 const routePattern = Astro.routePattern
 ---
 <NavProvider client:load {...{
   productCategories,
   industries: topIndustries,
-  starProducts
+  starProducts,
+  bannerMap: normalizeBanners
 }}>{}</NavProvider>
 <Nav client:load routePattern={routePattern} />

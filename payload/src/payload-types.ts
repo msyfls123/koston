@@ -1429,12 +1429,12 @@ export interface Banner {
   sustainable?: (string | null) | BannerImage;
   about?: (string | null) | BannerImage;
   careers?: (string | null) | BannerImage;
-  'news-and-information'?: (string | null) | BannerImage;
-  'honors-and-qualifications'?: (string | null) | BannerImage;
+  'news-list'?: (string | null) | BannerImage;
+  merits?: (string | null) | BannerImage;
   'online-service'?: (string | null) | BannerImage;
   'online-support'?: (string | null) | BannerImage;
   partnership?: (string | null) | BannerImage;
-  resouces?: (string | null) | BannerImage;
+  resources?: (string | null) | BannerImage;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1567,12 +1567,12 @@ export interface BannersSelect<T extends boolean = true> {
   sustainable?: T;
   about?: T;
   careers?: T;
-  'news-and-information'?: T;
-  'honors-and-qualifications'?: T;
+  'news-list'?: T;
+  merits?: T;
   'online-service'?: T;
   'online-support'?: T;
   partnership?: T;
-  resouces?: T;
+  resources?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

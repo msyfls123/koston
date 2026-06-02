@@ -1,0 +1,95 @@
+---
+import { getPayload } from 'payload'
+import { config } from 'payload-app'
+
+const payload = await getPayload({ config })
+const onlineConfig = await payload.findGlobal({ slug: 'online'})
+const email = 'koston@163.com'
+
+const socialLinks = [
+  {
+    icon: '/images/wechat.svg',
+    qrcode: '/images/wechat.svg'
+  },
+  {
+    icon: '/images/weibo.svg',
+    link: 'https://weibo.com',
+  },
+  {
+    icon: '/images/douyin.svg',
+    link: 'https://douyin.com',
+  },
+  {
+    icon: '/images/xiaohongshu.svg',
+    link: 'https://xiaohongshu.com',
+  },
+]
+---
+
+<footer class="bg-footer mt-auto">
+  <div class="mx-auto max-w-320 px-20 pt-18 pb-6">
+    <img src="/logo.png" class='size-30 bg-slate-100' />
+    <div class="mt-18 flex flex-start space-x-24 text-text ">
+      <div class="space-y-1">
+        <h2 class="text-sm font-bold">上海总部</h2>
+        <p class="text-xs">上海市嘉定区马陆镇浏翔公路2150号</p>
+        <p class="text-xs">邮编: 201801</p>
+      </div>
+      <div class="space-y-1">
+        <h2 class="text-sm font-bold">联系我们</h2>
+        <p class="text-xs">服务热线：<a href=`tel:${onlineConfig.hotline}`>{onlineConfig.hotline}</a></p>
+        <p class="text-xs">邮箱：<a href=`mailto:${email}`>{email}</a></p>
+      </div>
+      <div class="space-y-1 flex-none">
+        <h2 class="text-sm font-bold">购买渠道</h2>
+        <p class="text-xs flex items-center leading-0 mt-1.5">
+          <a href={onlineConfig.link1688} target="_blank">
+            1688
+          </a>
+          <span class="before:inline-block before:bg-text before:w-px before:h-3 mx-3"/>
+          <a href={onlineConfig.linkQianniu} target="_blank">
+            千牛
+          </a>
+        </p>
+      </div>
+      <div class="space-y-1 ml-auto">
+        <h2 class="text-sm font-bold">订阅我们，获取最新动态</h2>
+        <ul class="flex space-x-4 mt-4">
+          {socialLinks.map(({ icon, link, qrcode}) => (
+            <li>
+              <div class="relative size-9 bg-contain group/social" style={{
+                backgroundImage: `url(${icon})`
+              }}>
+                {qrcode && <div
+                  class="absolute size-25 bottom-20 bg-amber-300/35 bg-contain hidden group-hover/social:block"
+                  style={{
+                    backgroundImage: `url(${qrcode})`
+                  }}
+                ></div>}
+                {link && <a
+                  href={link}
+                  target="_blank"
+                  class="w-full h-full block"
+                ></a>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="bg-panel py-6">
+    <div class="mx-auto max-w-320 px-20 flex justify-between text-sm items-center">
+      <span>
+        © 版权所有：壳盾新材料科技有限公司
+      </span>
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        沪ICP备10928739号-1
+      </a>
+      <span class="flex space-x-1">
+        <img src="https://inews.gtimg.com/newsapp_bt/0/0613150938895_706/0" class="icon">
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030002000001" target="_blank" rel="nofollow" dt-imp-once="true" dt-eid="em_bottom_outer_chain" dt-params="chain_name=粤公网安备 44030002000001号&amp;dt_element_path=['em_bottom_outer_chain']" class="link-item">粤公网安备 44030002000001号</a>
+      </span>
+    </div>
+  </div>
+</footer>

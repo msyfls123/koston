@@ -1,8 +1,9 @@
 import type { CollectionConfig } from "payload";
-import { getUploadDir, MediaSubDir } from "./base";
+import { BaseImageConfig, getUploadDir, MediaSubDir } from "./base";
 import { label } from "../../libs/utils";
 
 export const HonorBanner: CollectionConfig = {
+    ...BaseImageConfig,
     slug: MediaSubDir.HonorBanner,
     labels: label('荣誉封面'),
     admin: {

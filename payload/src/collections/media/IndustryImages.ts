@@ -1,7 +1,8 @@
 import type { CollectionConfig } from "payload";
-import { getUploadDir, MediaSubDir } from "./base";
+import { BaseImageConfig, getUploadDir, MediaSubDir } from "./base";
 
 export const IndustryImages: CollectionConfig = {
+    ...BaseImageConfig,
     slug: MediaSubDir.IndustryImages,
     labels: {
         singular: '行业封面图',

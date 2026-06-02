@@ -1,8 +1,9 @@
 import type { CollectionConfig } from "payload";
-import { getUploadDir, MediaSubDir } from "./base";
+import { BaseImageConfig, getUploadDir, MediaSubDir } from "./base";
 import { label } from "../../libs/utils";
 
 export const ResourceFiles: CollectionConfig = {
+    ...BaseImageConfig,
     slug: MediaSubDir.ResourceFiles,
     labels: label('下载资源文件'),
     admin: {

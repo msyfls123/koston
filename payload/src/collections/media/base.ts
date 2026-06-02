@@ -1,4 +1,5 @@
 import path from 'path'
+import { CollectionConfig } from 'payload'
 
 type ImageWithSizes = {
   filename?: string | null
@@ -38,4 +39,10 @@ export const getCertainSizeImageName = (fileData: ImageWithSizes | null | undefi
   const targetSize = fileData.sizes?.[sizeName]
   if (targetSize?.filename) return targetSize.filename
   return fileData.filename ?? ''
+}
+
+export const BaseImageConfig: Partial<CollectionConfig> = {
+  access: {
+    read: () => true,
+  }
 }

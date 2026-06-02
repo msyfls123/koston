@@ -1,7 +1,8 @@
 import type { CollectionConfig } from "payload";
-import { getUploadDir, MediaSubDir } from "./base";
+import { BaseImageConfig, getUploadDir, MediaSubDir } from "./base";
 
 export const BannerImages: CollectionConfig = {
+    ...BaseImageConfig,
     slug: MediaSubDir.BannerImages,
     labels: {
         singular: '横幅图',
