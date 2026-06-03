@@ -1,30 +1,24 @@
 import type { CollectionConfig } from "payload";
 import { BaseImageConfig, getUploadDir, MediaSubDir } from "./base";
 
-export const BannerImages: CollectionConfig = {
+export const NewsImages: CollectionConfig = {
     ...BaseImageConfig,
-    slug: MediaSubDir.BannerImages,
+    slug: MediaSubDir.NewsImages,
     labels: {
-        singular: '横幅图',
-        plural: '横幅图'
+        singular: '新闻图',
+        plural: '新闻图'
     },
     admin: {
         hidden: true
     },
     upload: {
-        staticDir: getUploadDir(MediaSubDir.BannerImages),
+        staticDir: getUploadDir(MediaSubDir.NewsImages),
         imageSizes: [
             {
                 name: 'cropped',
-                width: 2400,
-                height: 720,
+                width: 1320,
+                height: 790,
                 position: 'centre'
-            },
-            {
-              name: 'home',
-              width: 2560,
-              height: 960,
-              position: 'centre'
             }
         ],
         mimeTypes: ['image/png', 'image/jpeg']

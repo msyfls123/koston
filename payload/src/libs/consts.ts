@@ -42,6 +42,7 @@ export const PageNameMap: Record<PageType, {
 }
 
 export const BannerPages = [
+  PageType.Home,
   PageType.ProductCategory,
   PageType.IndustryCategory,
   PageType.StarProducts,

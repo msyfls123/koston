@@ -75,6 +75,15 @@ export const findRouteCategory = (routePattern: string, map: IRouteMap = RoutesM
   })?.[0]
 }
 
+export const getRoute = (pageType: PageType, payload?: Record<string, string | number>) => {
+  const pattern = AllRoutes[pageType]
+  const route = payload ? Object
+    .entries(payload)
+    .reduce((acc, [key, value]) => acc.replace(`[${key}]`, value.toString()), pattern)
+    : pattern
+  return route
+}
+
 export const HeaderNavs: Array<{
   category: RouteCategory;
   name: string;

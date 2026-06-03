@@ -1,9 +1,61 @@
+import { array } from 'payload/shared'
 import { MediaSubDir } from '../collections/media/base'
 
 import { label } from '../libs/utils'
 import { type GlobalConfig } from 'payload'
 
 export const StaticPages: GlobalConfig[] = [
+  {
+    slug: 'home',
+    label: '首页配置',
+    fields: [
+      {
+        type: 'tabs',
+        tabs: [
+          {
+            label: '模块区',
+            fields: [
+              {
+                type: 'array',
+                label: '模块列表',
+                name: 'sections',
+                labels: label('模块'),
+                fields: [
+                  {
+                    type: 'text',
+                    name: 'name',
+                    label: '名称'
+                  },
+                  {
+                    type: 'text',
+                    name: 'engName',
+                    label: '英文名称'
+                  },
+                  {
+                    type: 'textarea',
+                    name: 'description',
+                    label: '介绍'
+                  },
+                  {
+                    type: 'upload',
+                    name: 'cover',
+                    relationTo: 'home-section-images',
+                    label: '封面图'
+                  },
+                  {
+                    type: 'text',
+                    name: 'url',
+                    label: '链接地址',
+                    defaultValue: '/about'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   {
     slug: 'innovation',
     label: '技术与创新',
@@ -224,5 +276,6 @@ export const StaticPages: GlobalConfig[] = [
         type: 'richText'
       }
     ]
-  }
+  },
+  
 ]

@@ -1,3 +1,4 @@
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext';
 import type { CollectionConfig } from 'payload';
 
 export const Industries: CollectionConfig = {
@@ -33,9 +34,26 @@ export const Industries: CollectionConfig = {
                         },
 
                         {
-                            name: 'text',
+                            name: 'indroduction',
                             label: "介绍",
                             type: 'richText',
+                        },
+                        {
+                          name: 'excerpt',
+                          type: 'text',
+                          virtual: true,
+                          label: '摘抄',
+                          hooks: {
+                            afterRead: [
+                              ({ siblingData }) => {
+                                const indroduction = siblingData.indroduction
+                                const plaintext = convertLexicalToPlaintext({
+                                  data: indroduction,
+                                })
+                                return plaintext
+                              }
+                            ]
+                          }
                         },
                         {
                             name: 'thumbnail',

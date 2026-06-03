@@ -83,6 +83,8 @@ export interface Config {
     'honor-banner': HonorBanner;
     'award-images': AwardImage;
     'star-product-images': StarProductImage;
+    'home-section-images': HomeSectionImage;
+    'news-images': NewsImage;
     'resource-files': ResourceFile;
     posts: Post;
     'payload-kv': PayloadKv;
@@ -112,6 +114,8 @@ export interface Config {
     'honor-banner': HonorBannerSelect<false> | HonorBannerSelect<true>;
     'award-images': AwardImagesSelect<false> | AwardImagesSelect<true>;
     'star-product-images': StarProductImagesSelect<false> | StarProductImagesSelect<true>;
+    'home-section-images': HomeSectionImagesSelect<false> | HomeSectionImagesSelect<true>;
+    'news-images': NewsImagesSelect<false> | NewsImagesSelect<true>;
     'resource-files': ResourceFilesSelect<false> | ResourceFilesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -124,6 +128,7 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
+    home: Home;
     innovation: Innovation;
     sustainable: Sustainable;
     about: About;
@@ -134,6 +139,7 @@ export interface Config {
     banners: Banner;
   };
   globalsSelect: {
+    home: HomeSelect<false> | HomeSelect<true>;
     innovation: InnovationSelect<false> | InnovationSelect<true>;
     sustainable: SustainableSelect<false> | SustainableSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
@@ -269,7 +275,7 @@ export interface Industry {
   _order?: string | null;
   name?: string | null;
   engName?: string | null;
-  text?: {
+  indroduction?: {
     root: {
       type: string;
       children: {
@@ -284,6 +290,7 @@ export interface Industry {
     };
     [k: string]: unknown;
   } | null;
+  excerpt?: string | null;
   thumbnail?: (string | null) | IndustryImage;
   solution?: {
     root: {
@@ -369,8 +376,39 @@ export interface News {
     [k: string]: unknown;
   } | null;
   date?: string | null;
+  cover?: (string | null) | NewsImage;
+  excerpt?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-images".
+ */
+export interface NewsImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -536,6 +574,14 @@ export interface BannerImage {
       filesize?: number | null;
       filename?: string | null;
     };
+    home?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
 }
 /**
@@ -601,6 +647,35 @@ export interface HonorBanner {
  * via the `definition` "award-images".
  */
 export interface AwardImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-section-images".
+ */
+export interface HomeSectionImage {
   id: string;
   alt?: string | null;
   updatedAt: string;
@@ -724,6 +799,14 @@ export interface PayloadLockedDocument {
         value: string | StarProductImage;
       } | null)
     | ({
+        relationTo: 'home-section-images';
+        value: string | HomeSectionImage;
+      } | null)
+    | ({
+        relationTo: 'news-images';
+        value: string | NewsImage;
+      } | null)
+    | ({
         relationTo: 'resource-files';
         value: string | ResourceFile;
       } | null)
@@ -841,7 +924,8 @@ export interface IndustriesSelect<T extends boolean = true> {
   _order?: T;
   name?: T;
   engName?: T;
-  text?: T;
+  indroduction?: T;
+  excerpt?: T;
   thumbnail?: T;
   solution?: T;
   relatedProducts?:
@@ -861,6 +945,8 @@ export interface NewsSelect<T extends boolean = true> {
   title?: T;
   content?: T;
   date?: T;
+  cover?: T;
+  excerpt?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1022,6 +1108,16 @@ export interface BannerImagesSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
+        home?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
       };
 }
 /**
@@ -1164,6 +1260,70 @@ export interface StarProductImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-section-images_select".
+ */
+export interface HomeSectionImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "news-images_select".
+ */
+export interface NewsImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "resource-files_select".
  */
 export interface ResourceFilesSelect<T extends boolean = true> {
@@ -1228,6 +1388,25 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: string;
+  sections?:
+    | {
+        name?: string | null;
+        engName?: string | null;
+        description?: string | null;
+        cover?: (string | null) | HomeSectionImage;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1422,6 +1601,7 @@ export interface Online {
  */
 export interface Banner {
   id: string;
+  home?: (string | null) | BannerImage;
   'product-category'?: (string | null) | BannerImage;
   'industry-category'?: (string | null) | BannerImage;
   'star-products'?: (string | null) | BannerImage;
@@ -1437,6 +1617,25 @@ export interface Banner {
   resources?: (string | null) | BannerImage;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        name?: T;
+        engName?: T;
+        description?: T;
+        cover?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1560,6 +1759,7 @@ export interface OnlineSelect<T extends boolean = true> {
  * via the `definition` "banners_select".
  */
 export interface BannersSelect<T extends boolean = true> {
+  home?: T;
   'product-category'?: T;
   'industry-category'?: T;
   'star-products'?: T;

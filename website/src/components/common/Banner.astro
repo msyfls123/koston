@@ -1,0 +1,34 @@
+---
+import { getBanner, getPayloadApp } from '@/lib/template'
+import { PageNameMap, type PageType } from "payload-app/consts";
+
+
+
+interface Props {
+  pageType: PageType
+  fullScreen?: boolean
+}
+
+const { pageType, fullScreen } = Astro.props
+const payload = await getPayloadApp()
+const banners = await payload.findGlobal({ slug: 'banners'})
+
+const banner = getBanner(banners, pageType)
+const { cnName, enName } = PageNameMap[pageType]
+---
+
+<div class:list={[
+  "relative h-97 bg-cover bg-center ",
+  {'w-screen left-1/2 translate-x-[-50vw]': fullScreen}
+ ]} style={{
+  backgroundImage: `url('${banner}')`
+}}>
+  <div class="max-w-320 w-full mx-auto relative">
+    <div class="absolute z-20 left-30 top-26 text-white">
+      <ruby class="font-mono whitespace-pre-line text-[42px] ">
+        {enName}
+      </ruby>
+      <h1 class="mt-1.5 text-[50px] leading-none">{cnName}</h1>
+    </div>
+  </div>
+</div>

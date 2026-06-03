@@ -18,7 +18,9 @@ export enum MediaSubDir {
     HonorBanner = 'honor-banner',
     AwardImages = 'award-images',
     ResourceFiles = 'resource-files',
-    StarProductImages = 'star-product-images'
+    StarProductImages = 'star-product-images',
+    HomeSectionImages = 'home-section-images',
+    NewsImages = 'news-images',
 }
 
 const normalize = (url: string) => url.replace(/\\/g, '/')

@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { BaseImageConfig, getUploadDir } from "./base";
+import { label } from "../../libs/utils";
 
 export const RichTextImages: CollectionConfig = {
     ...BaseImageConfig,
@@ -7,10 +8,7 @@ export const RichTextImages: CollectionConfig = {
     access: {
         read: () => true,
       },
-    labels: {
-        singular: '富文本图片',
-        plural: '富文本图片'
-    },
+    labels: label('富文本图片（不要编辑）'),
     upload: {
         staticDir: getUploadDir('richtext-images'),
         mimeTypes: [

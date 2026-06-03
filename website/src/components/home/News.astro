@@ -1,0 +1,29 @@
+---
+import { getPayloadApp, getImageUrl } from '@/lib/template'
+import { ChevronRight } from 'lucide-react'
+import { MediaSubDir } from 'payload-app'
+const payload = await getPayloadApp()
+
+const newsList = await payload.find({ collection: 'news', limit: 3})
+---
+
+<ul class='mt-23 flex justify-between space-x-19'>
+  {newsList.docs.map((news) => (
+    <li class="bg-card flex-1/3">
+      <div class="h-70 bg-cover bg-center" style={{
+        backgroundImage: `url('${getImageUrl(news.cover, MediaSubDir.NewsImages, 'cropped')}')`
+      }}></div>
+      <a href={`/news/${news.id}`}
+        class='py-8 px-6 block'
+      >
+        <div class='flex justify-between items-center'>
+          <div>
+            <h2 class="text-xl font-medium">{news.title}</h2>
+            <p class="text-sm font-medium">{news.date ? new Date(news.date).toLocaleDateString() : ''}</p>
+          </div>
+        </div>
+        <div class="text-xs text-gray mt-6 line-clamp-2">{news.excerpt}</div>
+      </a>
+    </li>
+  ))}
+</ul>

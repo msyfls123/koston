@@ -51,8 +51,10 @@
 @theme {
   --color-text: #001a28;
   --color-gray: #898989;
+  --color-card: #e8ecef;
   --color-footer: #fbfbfb;
   --color-panel: #f3f5f5;
+  --color-red: #c80018;
 }
 
 :root {

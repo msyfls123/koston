@@ -1,20 +1,73 @@
 ---
 import { getPayload } from 'payload'
 import { config } from 'payload-app'
-import Welcome from '../components/Welcome.astro'
-import Layout from '../layouts/Layout.astro'
-import Industries from '../components/Industries.astro'
-import News from '../components/News.astro'
+import Layout from "../layouts/Layout.astro";
+import { PageType } from 'payload-app/consts';
+import { getBanner } from '../lib/template'
+import HomeStarProducts from '@/components/home/StarProducts.astro';
+import HomeIndustries from '@/components/home/Industries.astro';
+import HomeSections from '@/components/home/Sections.astro';
+import News from '@/components/home/News.astro';
+import { getRoute } from '@/lib/route'
 
 const payload = await getPayload({ config })
 
-const posts = await payload.find({ collection: 'posts', sort: 'createdAt' })
+const banners = await payload.findGlobal({ slug: 'banners'})
+
+const banner = getBanner(banners, PageType.Home)
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-  <Welcome posts={posts} />
-  <Industries />
-  <News />
+  <article class="text-text">
+    <!-- banner -->
+    <div class="relative w-full h-0 pb-[37.5%] bg-cover bg-center box-border bg-border" style={{
+      backgroundImage: `url('${banner}')`
+    }}>
+      <div class="absolute z-20 left-30 top-26 text-white">
+        <h2 class="font-mono whitespace-pre-line text-5xl ">Protect Assets,
+          Safeguard Environment
+        </h2>
+        <p class="mt-2 text-2xl">保护客户资产，守护社会环境。</p>
+        <p class="mt-10 text-sm w-75 font-light">为工业资产铸盾，为绿色未来添彩，壳盾新材料致力于以可持续的涂料解决方案，成为您值得信赖的专业保护伙伴。</p>
+      </div>
+    </div>
+    <!-- 明星产品 -->
+     <div class="bg-panel pt-40 px-20">
+      <div class="flex justify-between">
+        <div>
+          <h2 class="text-3xl font-medium">明星产品</h2>
+          <p class="font-medium">Star Products</p>
+        </div>
+        <a href={getRoute(PageType.StarProducts)} class="bg-text text-white h-10 px-8 leading-10">查看更多</a>
+      </div>
+      <HomeStarProducts />
+     </div>
+     <!-- 重点行业 -->
+     <div class="bg-panel pt-40 px-20">
+      <div class="flex justify-between">
+        <div>
+          <h2 class="text-3xl font-medium">重点行业</h2>
+          <p class="font-medium">Key Industries</p>
+        </div>
+        <a href="/industry/" class="bg-text text-white h-10 px-8 leading-10">查看更多</a>
+      </div>
+      <HomeIndustries />
+     </div>
+     <!-- 首页模块 -->
+      <HomeSections />
+     <!-- 新闻资讯 -->
+      <div class="bg-panel mt-33 px-15 pt-23 pb-33">
+        <div class="flex justify-between">
+          <div>
+            <h2 class="text-3xl font-medium">新闻资讯</h2>
+            <p class="font-medium">New information</p>
+          </div>
+          <a href="/news/" class="bg-text text-white h-10 px-8 leading-10">查看更多</a>
+        </div>
+        <News />
+     </div>
+  </article>
 </Layout>

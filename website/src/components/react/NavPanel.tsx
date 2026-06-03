@@ -4,7 +4,7 @@ import { useNavData } from "../context/NavContext"
 import { useMemo, useState, type HTMLAttributes } from "react"
 import { PageNameMap, PageType } from "payload-app/consts"
 import { cn } from "@/lib/utils"
-import { AllRoutes, RouteCategory, RoutesMap } from "@/lib/route"
+import { AllRoutes } from "@/lib/route"
 
 const ProductGroup = ({
   label,

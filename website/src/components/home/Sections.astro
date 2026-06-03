@@ -1,0 +1,33 @@
+---
+import { getImageUrl, getPayloadApp } from '@/lib/template'
+import { ChevronRight } from 'lucide-react'
+import { MediaSubDir } from 'payload-app'
+
+const payload = await getPayloadApp()
+
+const home = await payload.findGlobal({ slug: 'home' })
+const sections = home.sections
+---
+
+<div class="space-y-35 mt-80">
+  {sections && sections.map((section, index) => (
+    <div class:list={[
+      'flex',
+      {
+        'flex-row-reverse bg-panel': index % 2 === 1
+      }
+    ]}>
+      <a class="flex-1/2 py-13 px-20" href={section.url}>
+        <h2 class="text-3xl font-medium">{section.name}</h2>
+        <p class="font-medium">{section.engName}</p>
+        <div class="text-gray mt-6 line-clamp-3">{section.description}</div>
+        <span class="mt-10 rounded-full bg-red leading-0 size-6 flex justify-center items-center">
+            <ChevronRight className='text-white size-5'/>
+          </span>
+      </a>
+      <div class="h-88 bg-cover bg-center flex-1/2" style={{
+        backgroundImage: `url('${getImageUrl(section.cover, MediaSubDir.HomeSectionImages, 'cropped')}')`
+      }}></div>
+    </div>
+  ))}
+</div>

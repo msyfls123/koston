@@ -1,0 +1,38 @@
+---
+import { getPayloadApp, getImageUrl } from '@/lib/template'
+import { MediaSubDir } from 'payload-app'
+const payload = await getPayloadApp()
+
+const starProducts = await payload.find({ collection: 'star-products', limit: 3})
+const [first, ...others] = starProducts.docs
+---
+
+<div class="flex mt-18">
+  <div class="w-1/2 h-100 bg-cover bg-center" style={{
+    backgroundImage: `url('${getImageUrl(first.cover, MediaSubDir.StarProductImages, 'top')}')`
+  }}></div>
+  <a
+    href={`/product/${typeof first.product === 'object' ? first.product.id : ''}`}
+    class="w-1/2 px-18 flex flex-col justify-center bg-white">
+    <h2 class="text-3xl font-medium">{first.name}</h2>
+    <p class="font-medium">{first.engName}</p>
+    <div class="text-gray mt-6">{first.description}</div>
+  </a>
+</div>
+
+<ul class='mt-15 flex justify-between space-x-14'>
+  {others.map((star) => (
+    <li class="bg-white flex-1/2">
+      <div class="h-63 bg-cover bg-center" style={{
+        backgroundImage: `url('${getImageUrl(star.cover, MediaSubDir.StarProductImages, 'normal')}')`
+      }}></div>
+      <a href={`/product/${typeof star.product === 'object' ? star.product.id : ''}`}
+        class='pt-8 px-6 pb-6 block'
+      >
+        <h2 class="text-xl font-medium">{star.name}</h2>
+        <p class="text-sm font-medium">{star.engName}</p>
+        <div class="text-xs text-gray mt-6">{star.description}</div>
+      </a>
+    </li>
+  ))}
+</ul>
