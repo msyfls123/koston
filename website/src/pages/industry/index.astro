@@ -1,0 +1,26 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Banner from '@/components/common/Banner.astro';
+import { PageType } from "payload-app/consts";
+import { getPayloadApp } from "@/lib/template";
+import { getRoute } from "@/lib/route";
+
+const payload = await getPayloadApp()
+const industries = await payload.find({ collection: 'industries' })
+
+---
+<Layout>
+  <Banner pageType={PageType.IndustryCategory} />
+
+  <article class="mt-30 mb-50 max-w-320 px-40">
+    <ul class="w-full grid grid-cols-3 gap-8">
+      {industries.docs.map((industry) => (
+        <li>
+          <a class="leading-0 relative flex items-center h-15 px-5 border border-card hover:scale-110 hover:bg-text hover:text-white duration-200 hover:border-none cursor-pointer" href={getRoute(PageType.IndustryDetail, { id: industry.id })}>
+            {industry.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </article>
+</Layout>
