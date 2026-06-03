@@ -85,6 +85,7 @@ export interface Config {
     'star-product-images': StarProductImage;
     'home-section-images': HomeSectionImage;
     'news-images': NewsImage;
+    'product-images': ProductImage;
     'resource-files': ResourceFile;
     posts: Post;
     'payload-kv': PayloadKv;
@@ -94,7 +95,7 @@ export interface Config {
   };
   collectionsJoins: {
     'product-categories': {
-      相关产品: 'products';
+      products: 'products';
     };
   };
   collectionsSelect: {
@@ -116,6 +117,7 @@ export interface Config {
     'star-product-images': StarProductImagesSelect<false> | StarProductImagesSelect<true>;
     'home-section-images': HomeSectionImagesSelect<false> | HomeSectionImagesSelect<true>;
     'news-images': NewsImagesSelect<false> | NewsImagesSelect<true>;
+    'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
     'resource-files': ResourceFilesSelect<false> | ResourceFilesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -213,6 +215,7 @@ export interface Product {
   engName?: string | null;
   category?: (string | null) | ProductCategory;
   introduction?: string | null;
+  cover?: (string | null) | ProductImage;
   section?:
     | {
         name?: string | null;
@@ -258,13 +261,42 @@ export interface Product {
 export interface ProductCategory {
   id: string;
   name?: string | null;
-  相关产品?: {
+  products?: {
     docs?: (string | Product)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-images".
+ */
+export interface ProductImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -807,6 +839,10 @@ export interface PayloadLockedDocument {
         value: string | NewsImage;
       } | null)
     | ({
+        relationTo: 'product-images';
+        value: string | ProductImage;
+      } | null)
+    | ({
         relationTo: 'resource-files';
         value: string | ResourceFile;
       } | null)
@@ -888,6 +924,7 @@ export interface ProductsSelect<T extends boolean = true> {
   engName?: T;
   category?: T;
   introduction?: T;
+  cover?: T;
   section?:
     | T
     | {
@@ -1013,7 +1050,7 @@ export interface StarProductsSelect<T extends boolean = true> {
  */
 export interface ProductCategoriesSelect<T extends boolean = true> {
   name?: T;
-  相关产品?: T;
+  products?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1295,6 +1332,38 @@ export interface HomeSectionImagesSelect<T extends boolean = true> {
  * via the `definition` "news-images_select".
  */
 export interface NewsImagesSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-images_select".
+ */
+export interface ProductImagesSelect<T extends boolean = true> {
   alt?: T;
   updatedAt?: T;
   createdAt?: T;

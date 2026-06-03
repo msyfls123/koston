@@ -2,7 +2,33 @@
 import Layout from "@/layouts/Layout.astro";
 import Banner from '@/components/common/Banner.astro';
 import { PageType } from "payload-app/consts";
+import { getPayloadApp } from "@/lib/template";
+import type { Product } from "payload-app";
+import { ProductCategory } from '@/components/react/ProductCategory'
+
+const payload = await getPayloadApp()
+const categories = await payload.find({ collection: 'product-categories' })
+
+const categoriesDocs = categories.docs.map((item) => ({
+  name: item.name,
+  id: item.id,
+  products: item.products?.docs?.map((doc: unknown) => ({
+    name: (doc as Product).name,
+    id: (doc as Product).id,
+  }))
+}))
+
+const params = Astro.url.searchParams;
+const searchKeyword = params.get('q') ?? '';
+const categoryQuery = params.get('category') ?? undefined
+
 ---
 <Layout>
   <Banner pageType={PageType.ProductCategory} />
+  <ProductCategory
+    categories={categoriesDocs}
+    searchQuery={searchKeyword}
+    categoryQuery={categoryQuery}
+    client:load
+  />
 </Layout>

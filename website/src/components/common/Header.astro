@@ -25,6 +25,7 @@ const topIndustries = industries.docs.map((item) => ({
 const starProducts = stars.docs.map((item) => ({
   id: item.id,
   name: item.name ?? '',
+  productId: typeof item.product === 'object' ? item.product.id : '',
   cover: typeof item.cover === 'object' ? getStaticUrl(MediaSubDir.StarProductImages, getCertainSizeImageName(item.cover, 'normal')) : ''
 }))
 

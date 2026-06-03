@@ -8,7 +8,7 @@
 # 路由
 
 - [ ] 静态页面
-- [ ] 产品
+- [x] 产品
 - [ ] 行业
 - [ ] 新闻
 
@@ -18,10 +18,13 @@
 - [ ] 产品查询，资源下载查询
 
 # UI
-- [ ] header
-- [ ] footer
-- [ ] banner
-- [ ] home
+- [x] header
+- [x] footer
+- [x] banner
+- [x] home
+
+# 优化
+- [ ] payload.find 使用 select 裁剪 fields
 
 # 参考资料
 - Mongodb 加密：https://oneuptime.com/blog/post/2026-01-16-docker-mongodb-auth-volumes/view#connecting-to-mongodb

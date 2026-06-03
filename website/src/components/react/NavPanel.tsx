@@ -1,10 +1,10 @@
 import { Input } from "../ui/input"
 import { MoveRight, Search } from 'lucide-react'
 import { useNavData } from "../context/NavContext"
-import { useMemo, useState, type HTMLAttributes } from "react"
+import { useCallback, useMemo, useRef, useState, type HTMLAttributes } from "react"
 import { PageNameMap, PageType } from "payload-app/consts"
 import { cn } from "@/lib/utils"
-import { AllRoutes } from "@/lib/route"
+import { AllRoutes, getRoute } from "@/lib/route"
 
 const ProductGroup = ({
   label,
@@ -37,17 +37,26 @@ const ProductGroup = ({
 export const ProductsPanel = () => {
   const store = useNavData()
   const [starId, setStarId] = useState<string | null>(store.starProducts[0]?.id)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const handleSearch = useCallback(() => {
+    if (!inputRef.current) return
+    const targetUrl = `${AllRoutes[PageType.ProductCategory]}?q=${inputRef.current.value}`
+    location.href = targetUrl
+  }, [])
 
   return <div>
     <div className="relative table border-[#c9caca] border mb-6">
-      <Input placeholder="输入名称查找" className="border-none rounded-none" />
-      <Search className="absolute right-1.5 top-1.5 cursor-pointer size-5" />
+      <Input ref={inputRef} placeholder="输入名称查找" className="border-none rounded-none" />
+      <Search
+        onClick={handleSearch}
+        className="absolute right-1.5 top-1.5 cursor-pointer size-5"
+      />
     </div>
 
     <div className="flex justify-between space-x-14">
       <ProductGroup label="按产品类别查找" list={store.productCategories.map(item => ({
         ...item,
-        url: item.id,
+        url: getRoute(PageType.ProductCategory) + `?category=${item.id}`,
       }))} />
       <ProductGroup label="按行业类别查找" list={store.industries.map(item => ({
         ...item,
@@ -58,7 +67,7 @@ export const ProductsPanel = () => {
         label="明星产品"
         list={store.starProducts.map(item => ({
           ...item,
-          url: item.id,
+          url: getRoute(PageType.ProductDetail, { id: item.productId }),
           name: item.name
         }))}
         className="ml-auto"

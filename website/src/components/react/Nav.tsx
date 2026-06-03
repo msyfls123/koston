@@ -86,6 +86,8 @@ export const Nav = ({ routePattern }: INavProps) => {
                 onPointerDown={() => {
                   forceOpen.current = true
                   isPointerDownOnContentRef.current = true
+                  if (nav.category === RouteCategory.Home) return
+                  handleOpen(nav.category)
                 }}
                 onClick={() => {
                   if (nav.category === RouteCategory.Home) location.href = '/'

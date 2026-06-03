@@ -2,6 +2,7 @@ import { defineAction } from 'astro:actions'
 import { z } from 'astro:schema'
 import { getPayload } from 'payload'
 import { config } from 'payload-app'
+import { product } from './product'
 
 export const server = {
   addPost: defineAction({
@@ -24,4 +25,5 @@ export const server = {
       return payload.delete({ collection: 'posts', id: input.id })
     },
   }),
+  product,
 }

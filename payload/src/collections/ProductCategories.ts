@@ -14,7 +14,8 @@ export const ProductCategories: CollectionConfig = {
       label: '类别名'
     },
     {
-      name: '相关产品',
+      name: 'products',
+      label: '相关产品',
       type: 'join',
       collection: 'products',
       on: 'category',

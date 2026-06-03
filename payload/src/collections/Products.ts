@@ -46,6 +46,12 @@ export const Products: CollectionConfig = {
               label: "产品介绍",
               type: 'textarea'
             },
+            {
+              name: 'cover',
+              label: '封面图',
+              type: 'upload',
+              relationTo: 'product-images',
+            },
           ]
         },
         {
