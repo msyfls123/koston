@@ -216,40 +216,39 @@ export interface Product {
   category?: (string | null) | ProductCategory;
   introduction?: string | null;
   cover?: (string | null) | ProductImage;
-  section?:
-    | {
-        name?: string | null;
-        engName?: string | null;
-        content: (
-          | {
-              text?: string | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'pureText';
-            }
-          | {
-              text?: {
-                root: {
-                  type: string;
-                  children: {
-                    type: any;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
+  sections?:
+    | (
+        | {
+            name?: string | null;
+            engName?: string | null;
+            text?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pureText';
+          }
+        | {
+            name?: string | null;
+            engName?: string | null;
+            richText?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
                   version: number;
-                };
-                [k: string]: unknown;
-              } | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'richText';
-            }
-        )[];
-        id?: string | null;
-      }[]
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'richText';
+          }
+      )[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -925,30 +924,27 @@ export interface ProductsSelect<T extends boolean = true> {
   category?: T;
   introduction?: T;
   cover?: T;
-  section?:
+  sections?:
     | T
     | {
-        name?: T;
-        engName?: T;
-        content?:
+        pureText?:
           | T
           | {
-              pureText?:
-                | T
-                | {
-                    text?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              richText?:
-                | T
-                | {
-                    text?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              name?: T;
+              engName?: T;
+              text?: T;
+              id?: T;
+              blockName?: T;
             };
-        id?: T;
+        richText?:
+          | T
+          | {
+              name?: T;
+              engName?: T;
+              richText?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

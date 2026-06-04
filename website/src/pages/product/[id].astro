@@ -1,8 +1,54 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { getImageUrl, getPayloadApp } from "@/lib/template";
+import { MediaSubDir, type Product, convertRichText } from "payload-app";
+
+const payload = await getPayloadApp()
 
 const { id } = Astro.params;
+let product: Product
+try {
+  product = await payload.findByID({ id: id! , collection: 'products' })
+} catch (err) {
+  return Astro.redirect('/404', 404)
+}
 ---
 <Layout>
-<p>这是 {id} 产品</p>
+
+  <article class="bg-footer text-text pt-10">
+    <div class="flex justify-between mx-8 bg-panel">
+      <div class="pt-20 px-13 pb-10 flex flex-col flex-1">
+        <h1 class="text-4xl font-medium">{product.name}</h1>
+        <p class="text-lg font-medium">{product.engName}</p>
+        <div class="text-gray mt-auto line-clamp-5">{product.introduction}</div>
+      </div>
+      <div class="m-6 w-[55%] h-0 pb-[30%] bg-cover bg-center"
+        style={{
+          backgroundImage: `url('${getImageUrl(product.cover, MediaSubDir.ProductImages, 'cropped')}')`
+        }}
+      ></div>
+    </div>
+
+    {
+      product.sections?.map((section, i) => (
+        <div class:list={[
+          'flex justify-between px-20 py-27',
+          {'bg-panel': i % 2 === 1}
+        ]}>
+          <div class="w-1/2 flex-none">
+            <h2 class="text-2xl">{section.name}</h2>
+            <p class="">{section.engName}</p>
+          </div>
+          <div class="w-1/2 flex-none">
+            {section.blockType === 'pureText' && <div>
+              {section.text}
+            </div> }
+            { section.blockType === 'richText' && section.richText && <div
+              set:html={convertRichText(section.richText)}
+            ></div> }
+          </div>
+        </div>
+      ))
+    }
+  </article>
 </Layout>
