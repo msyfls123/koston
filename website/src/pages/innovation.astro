@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Banner from "@/components/common/Banner.astro";
+import { PageType } from "payload-app/consts";
+import { convertRichText } from "payload-app";
+import { getPayloadApp, getImageUrl } from "@/lib/template";
+
+const payload = await getPayloadApp();
+const innovation = await payload.findGlobal({ slug: "innovation" });
+---
+
+<Layout>
+  <Banner pageType={PageType.Innovation} />
+  <article class="px-20 py-30 text-gray text-base">
+    {
+      innovation.introduction && (
+        <div
+          class="richtext text-center"
+          set:html={convertRichText(innovation.introduction)}
+        />
+      )
+    }
+  </article>
+</Layout>

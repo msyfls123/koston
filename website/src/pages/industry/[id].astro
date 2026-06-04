@@ -1,0 +1,86 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getRoute } from "@/lib/route";
+import { getImageUrl, getPayloadApp } from "@/lib/template";
+import { type Industry, MediaSubDir, type Product, convertRichText } from "payload-app";
+import { PageType } from "payload-app/consts";
+
+const payload = await getPayloadApp()
+
+const { id } = Astro.params;
+let industry: Industry
+let relatedProducts: Product[]
+try {
+  industry = await payload.findByID({ id: id! , collection: 'industries' })
+  relatedProducts = industry.relatedProducts?.map(({ relatedProduct }) => relatedProduct).filter((relatedProduct) => (
+    Boolean(relatedProduct) && typeof relatedProduct === 'object'
+  )) as Product[] ?? []
+} catch (err) {
+  return Astro.redirect('/404', 404)
+}
+---
+<Layout>
+  <article class="bg-panel text-text">
+    <div class="flex justify-between bg-white pt-20 pl-25 pb-40">
+      <div class="flex flex-col flex-1">
+        <p class="text-3xl font-medium">{industry.engName}</p>
+        <h1 class="text-4xl font-medium mt-1">{industry.name}</h1>
+        {industry.indroduction && <div
+          class="text-wall mt-20 richtext"
+          set:html={convertRichText(industry.indroduction)}
+        ></div>}
+      </div>
+      <div class="ml-24 w-[55%] h-0 pb-[55%] bg-cover bg-center"
+        style={{
+          backgroundImage: `url('${getImageUrl(industry.thumbnail, MediaSubDir.IndustryImages, 'square')}')`
+        }}
+      ></div>
+    </div>
+
+    <div class="p-30">
+      <div class="text-center">
+        <h2 class="text-3xl">解决方案</h2>
+        <p>Solution</p>
+      </div>
+      {industry.solution && <div
+        class="mt-15 richtext"
+        set:html={convertRichText(industry.solution)}
+      ></div>}
+    </div>
+
+    <div class="p-30">
+      <div class="text-center">
+        <h2 class="text-3xl">相关产品</h2>
+        <p>Related products</p>
+      </div>
+      <ul class="grid grid-cols-2 gap-25 mt-30">
+        {relatedProducts.map((relatedProduct) => (
+          <li class="rounded-3xl overflow-hidden hover:shadow-2xl">
+            <a href={getRoute(PageType.ProductDetail, { id: relatedProduct.id })}>
+            <div class="w-full h-84 bg-cover bg-center"
+              style={{
+                backgroundImage: `url('${getImageUrl(
+                  typeof relatedProduct === 'object' && relatedProduct?.cover,
+                  MediaSubDir.ProductImages,
+                  'cropped'
+                )}')`
+              }}
+            ></div>
+            <div class="flex justify-between p-10 bg-white">
+              <div>
+                <h3 class="text-2xl font-bold">{relatedProduct.name}</h3>
+                <p class="text-sm">{relatedProduct.engName}</p>
+              </div>
+              <span
+                class="border border-text hover:bg-text hover:text-white text-xs px-3 flex items-center h-6"
+              >
+                <span>点击了解详情</span>
+              </span>
+            </div>
+          </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </article>
+</Layout>

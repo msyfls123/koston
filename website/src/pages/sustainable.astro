@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Banner from "@/components/common/Banner.astro";
+import { PageType } from "payload-app/consts";
+import { convertRichText } from "payload-app";
+import { getPayloadApp } from "@/lib/template";
+
+const payload = await getPayloadApp();
+const sustainable = await payload.findGlobal({ slug: "sustainable" });
+---
+
+<Layout>
+  <Banner pageType={PageType.Sustainable} />
+  <article class="px-20 py-30 text-gray text-base">
+    {
+      sustainable.introduction && (
+        <div
+          class="richtext text-center"
+          set:html={convertRichText(sustainable.introduction)}
+        />
+      )
+    }
+  </article>
+</Layout>

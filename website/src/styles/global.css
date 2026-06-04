@@ -51,10 +51,12 @@
 @theme {
   --color-text: #001a28;
   --color-gray: #898989;
+  --color-wall: #9fa1a0;
   --color-card: #e8ecef;
   --color-panel: #f3f5f5;
   --color-footer: #fbfbfb;
   --color-red: #c80018;
+  --color-teal: #013356;
 }
 
 :root {
@@ -136,4 +138,34 @@
   html {
     @apply font-sans;
     }
+}
+
+@layer components {
+  .richtext h1 {
+    @apply text-4xl font-medium text-teal
+  }
+
+  .richtext h2 {
+    @apply text-3xl font-medium text-teal
+  }
+
+  .richtext h3 {
+    @apply text-2xl font-medium text-teal
+  }
+
+  .richtext h4 {
+    @apply text-xl
+  }
+
+  .richtext img {
+    @apply mx-auto
+  }
+
+  .richtext ul > li {
+    @apply list-disc ml-4.5
+  }
+
+  .richtext ol > li {
+    @apply list-decimal ml-4.5
+  }
 }
