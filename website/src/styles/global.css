@@ -57,6 +57,8 @@
   --color-footer: #fbfbfb;
   --color-red: #c80018;
   --color-teal: #013356;
+  --color-border: #668098;
+  --color-pale: #829BB0;
 }
 
 :root {

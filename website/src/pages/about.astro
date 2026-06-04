@@ -1,6 +1,77 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Banner from "@/components/common/Banner.astro";
+import { getImageUrl, getPayloadApp } from '@/lib/template';
+import { MediaSubDir } from 'payload-app';
+import { PageType } from "payload-app/consts";
+
+const payload = await getPayloadApp()
+const about = await payload.findGlobal({ slug: 'about' })
 ---
 <Layout>
-<p>about page</p>
+  <Banner pageType={PageType.About} />
+
+  <article>
+    <div class="px-20 py-33 bg-panel">
+      {
+        about.sections?.map((section) => (
+          <div class="flex justify-between pt-10 py-24 border-b-border not-last:border-b">
+            <div class="w-1/2 flex-none text-teal">
+              <h2 class="text-2xl">{section.title}</h2>
+              <p class="">{section.engTitle}</p>
+            </div>
+            <div class="w-1/2 flex-none">
+              <div class="text-gray text-lg whitespace-pre-line">
+                {section.content}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <ul class="py-54 pl-74 pr-34 grid grid-cols-3 gap-20">
+      {about.numbers?.map((num) => (
+        <li>
+          <p class="text-teal text-5xl font-sans">{num.number}</p>
+          <p class="text-pale text-2xl mt-1">{num.caption}</p>
+        </li>
+      ))}
+    </ul>
+
+    <div class="px-20 py-33 ">
+      <h2 class="text-3xl text-teal">发展历程</h2>
+      <p class="text-teal">development history</p>
+
+      <ol class="timeline relative max-w-230 space-y-45 my-50 mx-auto">
+        <span class="line absolute w-px left-1/2 top-0 bottom-3 bg-border -translate-x-1/2"></span>
+        {about.timeline?.map((item, iYear) => (
+          <li class="relative space-y-15">
+            <span class="dot absolute top-0.5 left-1/2 rounded-full size-3 -translate-1/2 bg-text"/>
+            {item.events?.map((event, iEvent) => (
+              <section class:list={[
+                'flex',
+                {'flex-row-reverse': iYear % 2 === 1}
+              ]}>
+                <div class:list={[
+                  "flex-1/2",
+                  iYear % 2 === 1 ? 'ml-[25%]' : 'mr-[25%]',
+                ]}>
+                  {iEvent === 0 && <h3 class="text-5xl mb-6">{item.year}</h3>}
+                  <div class="text-2xl">{event.event}</div>
+                </div>
+                <div
+                  class="bg-cover bg-center w-83 h-50 flex-1/2 rounded-2xl bg-text"
+                  style={{
+                    backgroundImage: `url('${getImageUrl(event.picture, MediaSubDir.TimelineImages, 'cropped')}')`
+                  }}
+                >
+                </div>
+              </section>
+            ))}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </article>
 </Layout>
