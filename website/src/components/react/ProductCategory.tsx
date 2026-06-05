@@ -68,7 +68,7 @@ export const ProductCategory = ({ categories, searchQuery, categoryQuery }: IPro
   }, [query, category])
 
   return (
-    <div className="flex pt-13 px-25 pb-45 text-text">
+    <div className="flex pt-13 px-25 pb-45 text-text bg-panel">
       <aside className="w-42 lg:w-53 flex-none mr-12 lg:mr-[15%]">
         <label className="text-2xl">按产品类别查找</label>
         <form
@@ -111,9 +111,9 @@ export const ProductCategory = ({ categories, searchQuery, categoryQuery }: IPro
       <article className="max-w-225 flex-1 ">
         <ul className="w-full grid grid-cols-2 gap-8">
           {docs.map((doc) => (
-            <li key={doc.id} className="bg-white">
+            <li key={doc.id} className="">
               <a
-                className="flex-1/2"
+                className="flex-1/2 block bg-white hover:shadow-md duration-150 active:shadow-none active:inset-shadow-sm"
                 href={getRoute(PageType.ProductDetail, { id: doc.id })}
               >
                 <div className="h-43 bg-cover bg-center" style={{

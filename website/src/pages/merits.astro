@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Banner from "@/components/common/Banner.astro";
+import { getImageUrl, getPayloadApp } from "@/lib/template";
+import { convertRichText, MediaSubDir } from "payload-app";
+import { PageType } from "payload-app/consts";
+
+const payload = await getPayloadApp();
+const merits = await payload.findGlobal({ slug: "merits" });
+---
+
+<Layout>
+  <Banner pageType={PageType.Merits} />
+
+  <article>
+    <div class="px-20 py-33">
+      <div class="flex justify-between mb-30">
+        <div class="w-1/2 flex-none text-teal">
+          <h2 class="text-3xl">奖项资质</h2>
+          <p class="">Honors and Qualification</p>
+        </div>
+        <div class="w-1/2 flex-none">
+          {
+            merits.overview && (
+              <div
+                class="richtext text-gray"
+                set:html={convertRichText(merits.overview)}
+              />
+            )
+          }
+        </div>
+      </div>
+
+      <div
+        class="bg-cover bg-center w-full h-130 bg-wall mb-20"
+        style={{
+          backgroundImage: `url('${getImageUrl(merits.banner, MediaSubDir.HonorBanner, "cropped")}')`,
+        }}
+      >
+      </div>
+
+      <ul class="award-list grid grid-cols-4 gap-x-2 gap-y-4 [&>li:nth-child(n+5)]:hidden">
+        {
+          merits.awards?.map((award) => (
+            <li class="">
+              <div class="hover:shadow-xl hover:rounded overflow-hidden hover:scale-102 duration-250 bg-panel">
+                <div
+                  class="bg-cover bg-center w-full h-50 bg-wall"
+                  style={{
+                    backgroundImage: `url('${getImageUrl(award.picture, MediaSubDir.AwardImages, "cropped")}')`,
+                  }}
+                ></div>
+                <div class="py-10 px-6">
+                  <h3 class="text-teal text-xl">{award.title}</h3>
+                  <p class="mt-10 text-gray text-xs">{award.description}</p>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex justify-center mt-20">
+        <button
+          class="btn-show-more cursor-pointer border-2 border-teal text-teal w-42 h-11 px-4 leading-11 flex justify-between items-center hover:bg-teal hover:text-white"
+        >
+          查看更多
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-chevron-down-icon lucide-chevron-down"
+            ><path d="m6 9 6 6 6-6"></path></svg
+          >
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document.querySelector('.btn-show-more')?.addEventListener('click', (e) => {
+        if (!e.currentTarget) return
+
+        // console.log(e.currentTarget, (e.currentTarget as HTMLButtonElement).style.display)
+        (e.target as HTMLButtonElement).remove()
+        document.querySelector('.award-list')?.classList.remove('[&>li:nth-child(n+5)]:hidden')
+      })
+    </script>
+  </article>
+</Layout>
+
+<slot

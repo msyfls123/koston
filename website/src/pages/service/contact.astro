@@ -1,0 +1,46 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Banner from "@/components/common/Banner.astro";
+import { getPayloadApp } from "@/lib/template";
+import { PageType } from "payload-app/consts";
+import alibaba from '@/assets/alibaba.png'
+import qianniu from '@/assets/qianniu.png'
+import { Image } from 'astro:assets';
+
+const payload = await getPayloadApp();
+const online = await payload.findGlobal({ slug: "online" });
+---
+
+<Layout>
+  <Banner pageType={PageType.OnlineService} />
+
+  <article class="bg-panel">
+    <div class="pt-55 pb-55 flex flex-col items-center text-teal">
+      <h2 class="text-3xl">
+        服务热线：<a href={`tel:${online.hotline}`}>{online.hotline}</a>
+      </h2>
+      <p class='mt-7'>人工服务时间：{online.workingTime}</p>
+    </div>
+
+    <ul class="flex text-teal justify-center space-x-30 py-35 bg-white">
+      <li class="flex flex-col items-center">
+        <div class="rounded-3xl border border-teal py-10 px-25">
+          <Image src={alibaba} alt="alibaba" class="size-26" />
+          <p class="font-medium mt-8 text-2xl text-center">1688</p>
+        </div>
+        <a href={online.link1688} class="mt-12 bg-pale text-white leading-8 px-5 rounded-lg font-light hover:bg-teal/80">
+          点击跳转购买
+        </a>
+      </li>
+      <li class="flex flex-col items-center">
+        <div class="rounded-3xl border border-teal py-10 px-25">
+          <Image src={qianniu} alt="alibaba" class="size-26" />
+          <p class="font-medium mt-8 text-2xl text-center">千牛</p>
+        </div>
+        <a href={online.linkQianniu} class="mt-12 bg-pale text-white leading-8 px-5 rounded-lg font-light hover:bg-teal/80">
+          点击跳转购买
+        </a>
+      </li>
+    </ul>
+  </article>
+</Layout>
