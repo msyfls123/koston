@@ -1,11 +1,13 @@
 import type { CollectionConfig } from "payload";
 import { label } from "../libs/utils";
+import { AdminGroup } from "../libs/admin";
 
 export const ProductCategories: CollectionConfig = {
   slug: 'product-categories',
   labels: label('产品类别'),
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
+    group: AdminGroup.Production,
   },
   fields: [
     {

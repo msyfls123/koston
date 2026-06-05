@@ -29,7 +29,8 @@ export const product = {
           name: true,
           engName: true,
           cover: true,
-        }
+        },
+        pagination: false,
       }).then(processCover)
     }
   }),
@@ -51,7 +52,8 @@ export const product = {
           name: true,
           engName: true,
           cover: true,
-        }
+        },
+        pagination: false,
       }).then(processCover)
     },
   }),
@@ -73,7 +75,8 @@ export const product = {
           name: true,
           engName: true,
           cover: true,
-        }
+        },
+        pagination: false,
       }).then(processCover)
     },
   }),

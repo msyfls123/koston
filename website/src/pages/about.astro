@@ -17,11 +17,11 @@ const about = await payload.findGlobal({ slug: 'about' })
         about.sections?.map((section) => (
           <div class="flex justify-between pt-10 py-24 border-b-border not-last:border-b">
             <div class="w-1/2 flex-none text-teal">
-              <h2 class="text-2xl">{section.title}</h2>
+              <h2 class="text-3xl">{section.title}</h2>
               <p class="">{section.engTitle}</p>
             </div>
             <div class="w-1/2 flex-none">
-              <div class="text-gray text-lg whitespace-pre-line">
+              <div class="text-gray text-lg whitespace-pre-line tracking-wider">
                 {section.content}
               </div>
             </div>

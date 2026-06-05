@@ -2,11 +2,15 @@
 import { type GlobalConfig } from 'payload'
 import { BannerPages, PageNameMap } from '../libs/consts'
 import { MediaSubDir } from '../collections/media/base'
+import { AdminGroup } from '../libs/admin'
 
 export const StaticConfigs: GlobalConfig[] = [
   {
     slug: 'online',
-    label: '线上服务',
+    label: '电话/链接配置',
+    admin: {
+      group: AdminGroup.Config,
+    },
     fields: [
       {
         name: 'workingTime',
@@ -30,11 +34,20 @@ export const StaticConfigs: GlobalConfig[] = [
         label: '千牛',
         type: 'text',
       },
+      {
+        name: 'hrEmail',
+        label: 'HR 邮箱',
+        type: 'text',
+        defaultValue: 'kostonhr@163.com'
+      }
     ]
   },
   {
     slug: 'banners',
-    label: '封面图大全',
+    label: '封面图配置',
+    admin: {
+      group: AdminGroup.Config,
+    },
     fields: BannerPages.map((pageType) => ({
       name: pageType,
       label: PageNameMap[pageType].cnName,

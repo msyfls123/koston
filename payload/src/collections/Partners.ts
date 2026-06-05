@@ -1,9 +1,14 @@
 import { type CollectionConfig } from "payload";
 import { label } from "../libs/utils";
+import { AdminGroup } from "../libs/admin";
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
   labels: label('加盟伙伴'),
+  admin: {
+    useAsTitle: 'name',
+    group: AdminGroup.Support,
+  },
   fields: [
     {
       name: 'name',

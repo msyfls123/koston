@@ -1564,11 +1564,27 @@ export interface About {
  */
 export interface Career {
   id: string;
-  talents?: string | null;
+  talents?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   benefits?: string | null;
   jobs?:
     | {
         title?: string | null;
+        enTitle?: string | null;
+        welcome?: string | null;
         description?: {
           root: {
             type: string;
@@ -1657,6 +1673,7 @@ export interface Online {
   hotline?: string | null;
   link1688?: string | null;
   linkQianniu?: string | null;
+  hrEmail?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1770,6 +1787,8 @@ export interface CareersSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        enTitle?: T;
+        welcome?: T;
         description?: T;
         id?: T;
       };
@@ -1815,6 +1834,7 @@ export interface OnlineSelect<T extends boolean = true> {
   hotline?: T;
   link1688?: T;
   linkQianniu?: T;
+  hrEmail?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

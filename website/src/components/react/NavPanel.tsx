@@ -60,7 +60,7 @@ export const ProductsPanel = () => {
       }))} />
       <ProductGroup label="按行业类别查找" list={store.industries.map(item => ({
         ...item,
-        url: item.id,
+        url: getRoute(PageType.IndustryDetail, { id: item.id }) + '#related-products',
         name: item.name
       }))} />
       <ProductGroup

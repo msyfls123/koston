@@ -1,12 +1,14 @@
 import type { CollectionConfig } from "payload";
 import { label } from "../libs/utils";
+import { AdminGroup } from "../libs/admin";
 
 export const StarProducts: CollectionConfig = {
   slug: 'star-products',
   labels: label('明星产品'),
   orderable: true,
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
+    group: AdminGroup.Production,
   },
   access: {
     read: () => true

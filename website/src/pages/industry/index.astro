@@ -6,7 +6,7 @@ import { getPayloadApp } from "@/lib/template";
 import { getRoute } from "@/lib/route";
 
 const payload = await getPayloadApp()
-const industries = await payload.find({ collection: 'industries' })
+const industries = await payload.find({ collection: 'industries', pagination: false })
 
 ---
 <Layout>

@@ -1,10 +1,14 @@
 import { type CollectionConfig } from "payload";
 import { label } from "../libs/utils";
 import { SUPPORT_NAME_MAP, SupportTarget } from "../libs/support";
+import { AdminGroup } from "../libs/admin";
 
 export const Supports: CollectionConfig = {
   slug: 'supports',
   labels: label('在线支持'),
+  admin: {
+    group: AdminGroup.Support
+  },
   fields: [
     {
       type: 'date',

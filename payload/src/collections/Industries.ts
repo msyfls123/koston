@@ -1,5 +1,6 @@
 import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext';
 import type { CollectionConfig } from 'payload';
+import { AdminGroup } from '../libs/admin';
 
 export const Industries: CollectionConfig = {
     slug: 'industries',
@@ -9,7 +10,8 @@ export const Industries: CollectionConfig = {
     },
     orderable: true,
     admin: {
-        useAsTitle: 'name'
+        useAsTitle: 'name',
+        group: AdminGroup.Production,
     },
     defaultSort: 'createdAt',
     fields: [

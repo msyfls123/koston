@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { label } from "../libs/utils";
+import { AdminGroup } from "../libs/admin";
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -9,7 +10,8 @@ export const Products: CollectionConfig = {
   },
   orderable: true,
   admin: {
-    useAsTitle: 'name'
+    useAsTitle: 'name',
+    group: AdminGroup.Production,
   },
   defaultSort: 'createdAt',
   fields: [

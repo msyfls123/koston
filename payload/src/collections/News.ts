@@ -1,10 +1,15 @@
 import { label } from "../libs/utils";
 import { type CollectionConfig } from "payload";
 import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
+import { AdminGroup } from "../libs/admin";
 
 export const News: CollectionConfig = {
   slug: 'news',
   labels: label('新闻'),
+  admin: {
+    useAsTitle: 'title',
+    group: AdminGroup.News,
+  },
   fields: [
     {
       name: 'title',

@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Banner from "@/components/common/Banner.astro";
+import { getImageUrl, getPayloadApp } from '@/lib/template';
+import { convertRichText, MediaSubDir } from 'payload-app';
+import { PageType } from "payload-app/consts";
+
+const payload = await getPayloadApp()
+const careers = await payload.findGlobal({ slug: 'careers' })
+const online = await payload.findGlobal({ slug: 'online' })
+Astro.locals.title = '职业发展'
+---
+<Layout>
+  <Banner pageType={PageType.Careers} />
+
+  <article>
+    <div class="px-20 py-50 space-y-25">
+      <div class="flex justify-between">
+        <div class="w-1/2 flex-none text-teal">
+          <h2 class="text-3xl">人才发展</h2>
+          <p class="">Talents development</p>
+        </div>
+        <div class="w-1/2 flex-none">
+          <div class="text-gray text-base leading-8 whitespace-pre-line tracking-widest">
+            { careers.talents && <div
+              class="richtext"
+              set:html={convertRichText(careers.talents)}
+            ></div> }
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <div class="w-1/2 flex-none text-teal">
+          <h2 class="text-3xl">福利待遇</h2>
+          <p class="">Benefits</p>
+        </div>
+        <div class="w-1/2 flex-none">
+          <div class="text-gray leading-7 whitespace-pre-line tracking-widest">
+            <div>{careers.benefits}</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-between">
+        <div class="w-1/2 flex-none text-teal">
+          <h2 class="text-3xl">热门职位</h2>
+          <p class="">Jobs</p>
+        </div>
+        <div class="w-1/2 flex-none space-y-32">
+          {careers.jobs?.map((job) => (
+            <div>
+              <div class="flex justify-between text-teal mb-9">
+                <h3 class="text-2xl">{job.title}</h3>
+                <span>{job.enTitle}</span>
+              </div>
+              <p class="text-wall mb-8 ">{job.welcome}</p>
+              <details class="group/job">
+                <summary class="bg-panel text-right p-2 cursor-pointer">
+                  <span class="ml-[calc(100%-95px)] text-gray pr-2 group-open/job:opacity-0">
+                    了解详情
+                  </span>
+                </summary>
+                { job.description && <div
+                  class="richtext p-2 text-sm tracking-wider"
+                  set:html={convertRichText(job.description)}
+                ></div> }
+              </details>
+            </div>
+          ))}
+          <div class="text-right text-xl font-medium text-teal">
+            投递邮箱: <a href={`mailto:${online.hrEmail}`}>
+              {online.hrEmail}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</Layout>

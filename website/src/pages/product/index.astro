@@ -7,15 +7,24 @@ import type { Product } from "payload-app";
 import { ProductCategory } from '@/components/react/ProductCategory'
 
 const payload = await getPayloadApp()
-const categories = await payload.find({ collection: 'product-categories' })
+const categories = await payload.find({
+  collection: 'product-categories',
+  pagination: false,
+  depth: 0
+})
+
+const allProducts = await payload.find({
+  collection: 'products',
+  pagination: false,
+  select: {
+    name: true,
+  }
+})
 
 const categoriesDocs = categories.docs.map((item) => ({
   name: item.name,
   id: item.id,
-  products: item.products?.docs?.map((doc: unknown) => ({
-    name: (doc as Product).name,
-    id: (doc as Product).id,
-  }))
+  products: item.products?.docs?.map((docId: unknown) => (allProducts.docs.find(doc => doc.id === docId))).filter(Boolean) as Product[]
 }))
 
 const params = Astro.url.searchParams;

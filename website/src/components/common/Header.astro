@@ -8,9 +8,9 @@ import { NavProvider } from '@/components/context/NavContext'
 
 const payload = await getPayload({ config })
 
-const categories = await payload.find({ collection: 'product-categories' })
-const industries = await payload.find({ collection: 'industries' })
-const stars = await payload.find({ collection: 'star-products' })
+const categories = await payload.find({ collection: 'product-categories', pagination: false })
+const industries = await payload.find({ collection: 'industries', pagination: false })
+const stars = await payload.find({ collection: 'star-products', pagination: false })
 const banners = await payload.findGlobal({ slug: 'banners'})
 
 const productCategories = categories.docs.slice(0, 6).map((item) => ({

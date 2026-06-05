@@ -3,11 +3,15 @@ import { MediaSubDir } from '../collections/media/base'
 
 import { label } from '../libs/utils'
 import { type GlobalConfig } from 'payload'
+import { AdminGroup } from '../libs/admin'
 
 export const StaticPages: GlobalConfig[] = [
   {
     slug: 'home',
     label: '首页配置',
+    admin: {
+      group: AdminGroup.Pages,
+    },
     fields: [
       {
         type: 'tabs',
@@ -59,6 +63,9 @@ export const StaticPages: GlobalConfig[] = [
   {
     slug: 'innovation',
     label: '技术与创新',
+    admin: {
+      group: AdminGroup.Pages,
+    },
     fields: [
       {
         name: 'introduction',
@@ -70,6 +77,9 @@ export const StaticPages: GlobalConfig[] = [
   {
     slug: 'sustainable',
     label: '绿色可持续',
+    admin: {
+      group: AdminGroup.Pages,
+    },
     fields: [
       {
         name: 'introduction',
@@ -81,6 +91,9 @@ export const StaticPages: GlobalConfig[] = [
   {
     slug: 'about',
     label: '关于壳盾',
+    admin: {
+      group: AdminGroup.Pages,
+    },
     fields: [
       {
 
@@ -179,6 +192,9 @@ export const StaticPages: GlobalConfig[] = [
   {
     slug: 'careers',
     label: '招聘',
+    admin: {
+      group: AdminGroup.Pages,
+    },
     fields: [
       {
         type: 'tabs',
@@ -189,7 +205,7 @@ export const StaticPages: GlobalConfig[] = [
               {
                 name: 'talents',
                 label: '人才发展',
-                type: 'textarea',
+                type: 'richText',
               },
               {
                 name: 'benefits',
@@ -213,6 +229,17 @@ export const StaticPages: GlobalConfig[] = [
                     type: 'text',
                   },
                   {
+                    name: 'enTitle',
+                    label: '英文头衔',
+                    type: 'text',
+                  },
+                  {
+                    name: 'welcome',
+                    label: '介绍词',
+                    type: 'textarea',
+                    defaultValue: '我们正在寻找热爱技术、追求卓越、愿意持续成长的你加入团队，与我们一起用技术创造价值、解决真实问题。'
+                  },
+                  {
                     name: 'description',
                     label: '职位要求',
                     type: 'richText'
@@ -228,6 +255,9 @@ export const StaticPages: GlobalConfig[] = [
   {
     slug: 'merits',
     label: '荣誉资质认证',
+    admin: {
+      group: AdminGroup.Pages,
+    },
     fields: [
       {
         name: 'overview',
@@ -269,6 +299,9 @@ export const StaticPages: GlobalConfig[] = [
   {
     slug: 'partnship',
     label: '加盟合作',
+    admin: {
+      group: AdminGroup.Config,
+    },
     fields: [
       {
         name: 'notice',
@@ -277,5 +310,4 @@ export const StaticPages: GlobalConfig[] = [
       }
     ]
   },
-  
 ]
