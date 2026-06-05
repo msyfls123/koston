@@ -1,0 +1,39 @@
+---
+import Banner from "@/components/common/Banner.astro";
+import Layout from "@/layouts/Layout.astro";
+import { getPayloadApp } from "@/lib/template";
+import { PageType } from "payload-app/consts";
+import { NewsList } from '@/components/react/NewsList'
+
+const params = Astro.url.searchParams;
+const year = Number(params.get('year'))
+const page = Number(params.get('page') ?? 1);
+
+const payload = await getPayloadApp()
+const now = new Date()
+const START_YEAR = 2025
+const pastYears = Array.from({ length: now.getFullYear() + 1 - START_YEAR })
+  .map((v, i) => START_YEAR + i)
+let yearsWithNews = await Promise.all(pastYears.map(year => (
+  payload.count({
+    collection: 'news',
+    where: {
+      date: {
+        greater_than_equal: new Date(year, 0, 1),
+        less_than: new Date(year + 1, 0, 1)
+      }
+    }
+  }).then(({ totalDocs }) => ({ count: totalDocs, year, }))
+)))
+yearsWithNews = yearsWithNews.filter(({ count }) => count > 0)
+yearsWithNews.sort((a, b) => b.year - a.year)
+---
+<Layout>
+  <Banner pageType={PageType.NewsList} />
+  <NewsList
+    client:load
+    page={page}
+    year={year || yearsWithNews[0]?.year || now.getFullYear()}
+    yearsWithNews={yearsWithNews}
+  />
+</Layout>

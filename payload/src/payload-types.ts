@@ -408,6 +408,7 @@ export interface News {
   } | null;
   date?: string | null;
   cover?: (string | null) | NewsImage;
+  visits?: number | null;
   excerpt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -979,6 +980,7 @@ export interface NewsSelect<T extends boolean = true> {
   content?: T;
   date?: T;
   cover?: T;
+  visits?: T;
   excerpt?: T;
   updatedAt?: T;
   createdAt?: T;

@@ -143,20 +143,28 @@
 }
 
 @layer components {
+  .richtext {
+    @apply tracking-wider
+  }
+
+  .richtext p {
+    @apply mb-4
+  }
+
   .richtext h1 {
-    @apply text-4xl font-medium text-teal
+    @apply text-4xl font-medium text-teal mb-6
   }
 
   .richtext h2 {
-    @apply text-3xl font-medium text-teal
+    @apply text-3xl font-medium text-teal mb-5
   }
 
   .richtext h3 {
-    @apply text-2xl font-medium text-teal
+    @apply text-2xl font-medium text-teal mb-4
   }
 
   .richtext h4 {
-    @apply text-xl
+    @apply text-xl mb-4
   }
 
   .richtext img {
@@ -169,5 +177,9 @@
 
   .richtext ol > li {
     @apply list-decimal ml-4.5
+  }
+
+  .richtext blockquote {
+    @apply border-l-2 border-l-wall pl-4
   }
 }

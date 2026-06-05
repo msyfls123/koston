@@ -1,0 +1,45 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getPayloadApp } from '@/lib/template';
+import { convertRichText, type News } from "payload-app";
+
+const payload = await getPayloadApp()
+const { id } = Astro.params;
+let news: News
+try {
+  news = await payload.findByID({ id: id! , collection: 'news' })
+} catch (err) {
+  return Astro.redirect('/404', 404)
+}
+
+const newVisits = (news.visits ?? 0) + 1
+
+await payload.update({
+  collection: 'news',
+  id: id!,
+  data: {
+    visits: newVisits,
+  }
+})
+
+const getDateText = (text: string) => {
+  const d = new Date(text)
+  return `${d.getFullYear()} 年 ${d.getMonth()} 月 ${d.getDay()} 日`
+}
+---
+<Layout>
+
+  <article class="px-25 py-40">
+    <div class="mb-25">
+      <h2 class="text-3xl text-teal font-medium">{news.title}</h2>
+      {news.date && <p class="mt-1">{getDateText(news.date)}</p>}
+      <p class="text-sm text-wall mt-5">访问量: {newVisits}</p>
+    </div>
+
+    {news.content && <div
+      class="richtext"
+      set:html={convertRichText(news.content)}
+    ></div> }
+  </article>
+
+</Layout>

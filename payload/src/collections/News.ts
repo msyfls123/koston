@@ -33,6 +33,15 @@ export const News: CollectionConfig = {
       label: '封面图'
     },
     {
+      name: 'visits',
+      type: 'number',
+      label: '訪問量',
+      defaultValue: 0,
+      admin: {
+        disabled: true,
+      }
+    },
+    {
       name: 'excerpt',
       type: 'text',
       virtual: true,
@@ -44,7 +53,7 @@ export const News: CollectionConfig = {
             const plaintext = convertLexicalToPlaintext({
               data: content,
             })
-            return plaintext
+            return plaintext.split('\n')[0].substring(0, 140)
           }
         ]
       }

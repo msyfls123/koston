@@ -3,6 +3,7 @@ import { z } from 'astro:schema'
 import { getPayload } from 'payload'
 import { config } from 'payload-app'
 import { product } from './product'
+import { news } from './news'
 
 export const server = {
   addPost: defineAction({
@@ -26,4 +27,5 @@ export const server = {
     },
   }),
   product,
+  news,
 }
