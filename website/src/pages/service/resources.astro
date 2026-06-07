@@ -1,0 +1,60 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Banner from '@/components/common/Banner.astro';
+import { PageType } from "payload-app/consts";
+import { getPayloadApp } from "@/lib/template";
+import { getStaticUrl, MediaSubDir, type Product, type Resource, type ResourceFile } from "payload-app";
+import { Resources as ResourcesComp } from '@/components/react/Resources'
+import type { PaginatedDocs } from "payload";
+
+const payload = await getPayloadApp()
+const categories = await payload.find({
+  collection: 'resource-categories',
+  pagination: false,
+  depth: 0
+})
+
+const processContent = (res: PaginatedDocs<Resource>) => {
+  return {
+    ...res,
+    docs: res.docs.map((item) => ({
+      ...item,
+      content: getStaticUrl(MediaSubDir.ResourceFiles, (typeof item.content === 'object' ? item.content?.filename : item.content) ?? '')
+    }))
+  }
+}
+
+const categoryResources = await Promise.all(
+  categories.docs.map((category) => (
+    payload.find({
+      collection: 'resources',
+      where: {
+        category: {
+          equals: category.id
+        }
+      },
+      page: 1,
+      limit: 6,
+    })
+      .then(processContent)
+      .then(res => ({
+        ...category,
+        resources: res.docs
+      }))
+  ))
+)
+
+const params = Astro.url.searchParams;
+const searchKeyword = params.get('q') ?? '';
+const categoryQuery = params.get('category') ?? undefined
+
+---
+<Layout>
+  <Banner pageType={PageType.Resources} />
+  <ResourcesComp
+    categories={categoryResources}
+    searchQuery={searchKeyword}
+    categoryQuery={categoryQuery}
+    client:load
+  />
+</Layout>

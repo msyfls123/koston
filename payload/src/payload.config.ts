@@ -23,6 +23,7 @@ import { Supports } from './collections/Supports'
 import { label } from './libs/utils'
 import { StarProducts } from './collections/StarProducts'
 import { ProductCategories } from './collections/ProductCategories'
+import { ResourceCategories } from './collections/ResourceCategories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -59,6 +60,7 @@ export default buildConfig({
     Supports,
     StarProducts,
     ProductCategories,
+    ResourceCategories,
     /** images **/
     IndustryImages,
     RichTextImages,

@@ -10,9 +10,9 @@ export enum RouteCategory {
 }
 
 export const AllRoutes = {
-  [PageType.ProductCategory]: '/product/',
+  [PageType.ProductCategory]: '/product',
   [PageType.ProductDetail]: '/product/[id]',
-  [PageType.IndustryCategory]: '/industry/',
+  [PageType.IndustryCategory]: '/industry',
   [PageType.IndustryDetail]: '/industry/[id]',
   [PageType.StarProducts]: '/product/stars',
   [PageType.OnlineSupport]: '/service/support',

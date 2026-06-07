@@ -76,6 +76,7 @@ export interface Config {
     supports: Support;
     'star-products': StarProduct;
     'product-categories': ProductCategory;
+    'resource-categories': ResourceCategory;
     'industry-images': IndustryImage;
     'richtext-images': RichtextImage;
     'banner-images': BannerImage;
@@ -97,6 +98,9 @@ export interface Config {
     'product-categories': {
       products: 'products';
     };
+    'resource-categories': {
+      resources: 'resources';
+    };
   };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
@@ -108,6 +112,7 @@ export interface Config {
     supports: SupportsSelect<false> | SupportsSelect<true>;
     'star-products': StarProductsSelect<false> | StarProductsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
+    'resource-categories': ResourceCategoriesSelect<false> | ResourceCategoriesSelect<true>;
     'industry-images': IndustryImagesSelect<false> | IndustryImagesSelect<true>;
     'richtext-images': RichtextImagesSelect<false> | RichtextImagesSelect<true>;
     'banner-images': BannerImagesSelect<false> | BannerImagesSelect<true>;
@@ -467,6 +472,7 @@ export interface Resource {
   id: string;
   title?: string | null;
   content?: (string | null) | ResourceFile;
+  category?: (string | null) | ResourceCategory;
   updatedAt: string;
   createdAt: string;
 }
@@ -488,6 +494,21 @@ export interface ResourceFile {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resource-categories".
+ */
+export interface ResourceCategory {
+  id: string;
+  name?: string | null;
+  resources?: {
+    docs?: (string | Resource)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -803,6 +824,10 @@ export interface PayloadLockedDocument {
         value: string | ProductCategory;
       } | null)
     | ({
+        relationTo: 'resource-categories';
+        value: string | ResourceCategory;
+      } | null)
+    | ({
         relationTo: 'industry-images';
         value: string | IndustryImage;
       } | null)
@@ -1008,6 +1033,7 @@ export interface PartnersSelect<T extends boolean = true> {
 export interface ResourcesSelect<T extends boolean = true> {
   title?: T;
   content?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1049,6 +1075,16 @@ export interface StarProductsSelect<T extends boolean = true> {
 export interface ProductCategoriesSelect<T extends boolean = true> {
   name?: T;
   products?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resource-categories_select".
+ */
+export interface ResourceCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  resources?: T;
   updatedAt?: T;
   createdAt?: T;
 }

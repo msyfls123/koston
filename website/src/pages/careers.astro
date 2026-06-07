@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Banner from "@/components/common/Banner.astro";
-import { getImageUrl, getPayloadApp } from '@/lib/template';
-import { convertRichText, MediaSubDir } from 'payload-app';
+import { getPayloadApp } from '@/lib/template';
+import { convertRichText } from 'payload-app';
 import { PageType } from "payload-app/consts";
 
 const payload = await getPayloadApp()

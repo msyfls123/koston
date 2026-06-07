@@ -18,6 +18,7 @@ try {
 } catch (err) {
   return Astro.redirect('/404', 404)
 }
+Astro.locals.title = industry.name
 ---
 <Layout>
   <article class="bg-panel text-text">

@@ -12,6 +12,8 @@ try {
   return Astro.redirect('/404', 404)
 }
 
+Astro.locals.title = news.title
+
 const newVisits = (news.visits ?? 0) + 1
 
 await payload.update({

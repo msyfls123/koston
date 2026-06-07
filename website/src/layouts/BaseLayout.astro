@@ -1,7 +1,13 @@
 ---
+import { PageNameMap, PageType } from "payload-app/consts"
 import "../styles/global.css"
+import { AllRoutes } from "@/lib/route"
 
-const title = Astro.locals.title ?? '🆘❤️‍🩹❤️ Koston Homepage'
+const routePattern = Astro.routePattern
+const foundPage = Object.entries(AllRoutes).find(([pageType, route]) => route === routePattern)?.[0] as PageType
+const name = foundPage && PageNameMap[foundPage].cnName
+
+const title = `${Astro.locals.title ?? name ?? '🆘❤️‍🩹❤️ Koston Homepage'} | 壳盾新材料`
 ---
 <!doctype html>
 <html lang="en">

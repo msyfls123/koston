@@ -20,5 +20,12 @@ export const Resources: CollectionConfig = {
       type: 'upload',
       relationTo: 'resource-files'
     },
+    {
+      name: 'category',
+      label: '类别',
+      type: 'relationship',
+      relationTo: 'resource-categories',
+      index: true,
+    }
   ]
 }

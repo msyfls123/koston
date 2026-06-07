@@ -30,6 +30,7 @@ export const HonorBanner: CollectionConfig = {
 }
 
 export const AwardImages: CollectionConfig = {
+  ...BaseImageConfig,
   slug: MediaSubDir.AwardImages,
   labels: label('奖项封面'),
   admin: {
