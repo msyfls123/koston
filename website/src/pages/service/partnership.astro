@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import PartnershipGet from './_partnership.get.astro'
+import PartnershipPost from './_partnership.post.astro'
+import Banner from '@/components/common/Banner.astro'
+import { PageType } from 'payload-app/consts'
+
+
+const method = Astro.request.method
+
+---
+<Layout>
+  <Banner pageType={PageType.Partnership} />
+  {method === 'GET' && <PartnershipGet />}
+  {method === 'POST' && <PartnershipPost />}
+</Layout>

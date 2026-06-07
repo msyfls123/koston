@@ -1,0 +1,38 @@
+---
+import { actions } from 'astro:actions'
+const result = Astro.getActionResult(actions.partnership.create);
+
+
+---
+
+<article>
+  <div class="px-20 py-40">
+    {result?.data?.id && (
+      <div class="text-teal mb-25">
+        <h2 class="text-4xl">申请提交成功</h2>
+        <p class="text-xl">Apply succeeded</p>
+      </div>
+      <p class="text-gray">我们会尽快处理您的申请</p>
+      <a
+        href="/"
+        class="mt-5 cursor-pointer w-25 h-11 px-4 leading-11 flex justify-center items-center bg-teal text-white hover:bg-text"
+      >回到首页</a>
+    )}
+    {result?.error && (
+      <div class="text-teal mb-25">
+        <h2 class="text-4xl">申请提交失败</h2>
+        <p class="text-xl">Apply failed</p>
+      </div>
+      <p class="text-gray mb-2">请返回检查表单并重新提交</p>
+      <details>
+        <summary class="text-sm cursor-pointer">查看详情</summary>
+        <pre class="p-2 bg-panel">{JSON.stringify((result.error as any).issues, null, 2)}</pre>
+      </details>
+      
+      <a
+        onclick="javascript:history.back()"
+        class="mt-5 cursor-pointer w-25 h-11 px-4 leading-11 flex justify-center items-center bg-teal text-white hover:bg-text"
+      >返回</a>
+    )}
+  </div>
+</article>

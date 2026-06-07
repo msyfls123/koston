@@ -9,7 +9,7 @@ export enum RouteCategory {
   Profile = 'profile'
 }
 
-export const AllRoutes = {
+export const AllRoutes: Record<PageType, string> = {
   [PageType.ProductCategory]: '/product',
   [PageType.ProductDetail]: '/product/[id]',
   [PageType.IndustryCategory]: '/industry',
@@ -17,7 +17,7 @@ export const AllRoutes = {
   [PageType.StarProducts]: '/product/stars',
   [PageType.OnlineSupport]: '/service/support',
   [PageType.OnlineService]: '/service/contact',
-  [PageType.Partnership]: '/service/partner',
+  [PageType.Partnership]: '/service/partnership',
   [PageType.Resources]: '/service/resources',
   [PageType.Innovation]: '/innovation',
   [PageType.Sustainable]: '/sustainable',

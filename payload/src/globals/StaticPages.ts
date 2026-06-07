@@ -297,7 +297,7 @@ export const StaticPages: GlobalConfig[] = [
     ]
   },
   {
-    slug: 'partnship',
+    slug: 'partnership',
     label: '加盟合作',
     admin: {
       group: AdminGroup.Config,

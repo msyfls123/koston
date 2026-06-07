@@ -141,7 +141,7 @@ export interface Config {
     about: About;
     careers: Career;
     merits: Merit;
-    partnship: Partnship;
+    partnership: Partnership;
     online: Online;
     banners: Banner;
   };
@@ -152,7 +152,7 @@ export interface Config {
     about: AboutSelect<false> | AboutSelect<true>;
     careers: CareersSelect<false> | CareersSelect<true>;
     merits: MeritsSelect<false> | MeritsSelect<true>;
-    partnship: PartnshipSelect<false> | PartnshipSelect<true>;
+    partnership: PartnershipSelect<false> | PartnershipSelect<true>;
     online: OnlineSelect<false> | OnlineSelect<true>;
     banners: BannersSelect<false> | BannersSelect<true>;
   };
@@ -461,6 +461,7 @@ export interface Partner {
   area?: string | null;
   price?: number | null;
   note?: string | null;
+  progress?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1023,6 +1024,7 @@ export interface PartnersSelect<T extends boolean = true> {
   area?: T;
   price?: T;
   note?: T;
+  progress?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1679,9 +1681,9 @@ export interface Merit {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "partnship".
+ * via the `definition` "partnership".
  */
-export interface Partnship {
+export interface Partnership {
   id: string;
   notice?: {
     root: {
@@ -1855,9 +1857,9 @@ export interface MeritsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "partnship_select".
+ * via the `definition` "partnership_select".
  */
-export interface PartnshipSelect<T extends boolean = true> {
+export interface PartnershipSelect<T extends boolean = true> {
   notice?: T;
   updatedAt?: T;
   createdAt?: T;

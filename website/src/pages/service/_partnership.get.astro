@@ -1,0 +1,78 @@
+---
+import { getPayloadApp } from "@/lib/template";
+import { convertRichText } from "payload-app";
+import { actions } from "astro:actions";
+
+const payload = await getPayloadApp();
+
+const partnership = await payload.findGlobal({ slug: "partnership" });
+
+const fields = [
+  { name: "name", label: "联系人", placeholder: "请输入" },
+  {
+    name: "phone",
+    label: "联系电话",
+    placeholder: "请输入 11 位手机号或座机号",
+  },
+  { name: "industry", label: "所属行业", placeholder: "行业类别" },
+  { name: "company", label: "公司名称", placeholder: "请输入" },
+  { name: "address", label: "公司地址", placeholder: "请输入" },
+  { name: "area", label: "项目施工面积（万m²）", placeholder: "请输入" },
+  { name: "price", label: "材料需求量（万元）", placeholder: "请输入", type: 'number' } as const,
+  { name: "note", label: "留言备注", placeholder: "请输入" },
+];
+---
+
+<article>
+  <div class="px-20 py-40 space-y-25">
+    <div class="join">
+      <div class="text-teal">
+        <h2 class="text-4xl">申请加盟提示</h2>
+        <p class="text-xl">Partnership</p>
+      </div>
+      <div
+        class="mt-7 text-gray text-base leading-8 whitespace-pre-line tracking-widest"
+      >
+        {
+          partnership.notice && (
+            <div
+              class="richtext"
+              set:html={convertRichText(partnership.notice)}
+            />
+          )
+        }
+      </div>
+    </div>
+
+    <div class="form">
+      <div class="text-teal">
+        <h2 class="text-4xl">在线加盟信息填写</h2>
+        <p class="text-xl">Apply form</p>
+      </div>
+      <form method="POST" action={actions.partnership.create}>
+        <div class="mt-12 grid grid-cols-2 gap-x-22 gap-y-13">
+          {
+            fields.map((field) => (
+              <fieldset class="">
+                <label class="text-xl text-gray">* {field.label}</label>
+                <input
+                  required
+                  type={field.type ?? 'text'}
+                  value="4444"
+                  name={field.name}
+                  class="mt-3 w-full px-4 h-13 leading-13 bg-footer"
+                  placeholder={field.placeholder}
+                />
+              </fieldset>
+            ))
+          }
+        </div>
+        <button
+          type="submit"
+          class="text-right mt-10 cursor-pointer w-42 h-11 px-4 leading-11 flex justify-between items-center bg-teal text-white hover:bg-text"
+          >提交</button
+        >
+      </form>
+    </div>
+  </div>
+</article>
