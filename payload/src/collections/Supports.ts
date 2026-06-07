@@ -28,8 +28,14 @@ export const Supports: CollectionConfig = {
             label: SUPPORT_NAME_MAP[v],
             value: v
           })),
-          name: '发送者',
+          name: 'sender',
           defaultValue: SupportTarget.Staff,
+        },
+        {
+          type: 'date',
+          name: 'time',
+          label: '时间',
+          defaultValue: () => new Date(),
         },
         {
           type: 'textarea',

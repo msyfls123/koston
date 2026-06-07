@@ -2,10 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { Input } from "../ui/input"
 import { ChevronDown, Download, Loader2, Search } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
-import { getRoute } from "@/lib/route"
-import { PageType } from "payload-app/consts"
 import { actions } from 'astro:actions'
-import type { Product, Resource } from "payload-app"
+import type { Resource } from "payload-app"
 import { Button } from "../ui/button"
 import type { PaginatedDocs } from "payload"
 

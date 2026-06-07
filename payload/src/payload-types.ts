@@ -520,7 +520,8 @@ export interface Support {
   created?: string | null;
   dialogue?:
     | {
-        发送者?: ('customer' | 'staff') | null;
+        sender?: ('customer' | 'staff') | null;
+        time?: string | null;
         content?: string | null;
         id?: string | null;
       }[]
@@ -1048,7 +1049,8 @@ export interface SupportsSelect<T extends boolean = true> {
   dialogue?:
     | T
     | {
-        发送者?: T;
+        sender?: T;
+        time?: T;
         content?: T;
         id?: T;
       };

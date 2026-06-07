@@ -1,0 +1,20 @@
+---
+import { getImage } from "astro:assets";
+import bgSupport from "@/assets/bg-support.png";
+import Layout from "@/layouts/Layout.astro";
+import Banner from "@/components/common/Banner.astro";
+import { PageType } from "payload-app/consts";
+import { Support as SupportComp } from '@/components/react/Support'
+
+const optimizedBackground = await getImage({ src: bgSupport, format: "png" });
+
+
+---
+<Layout mainClassname="flex-col flex">
+  <Banner pageType={PageType.OnlineSupport} />
+  <div class="w-full bg-cover bg-fixed bg-center flex-1" style={{
+    backgroundImage: `url('${optimizedBackground.src}')`
+  }}>
+    <SupportComp client:load />
+  </div>
+</Layout>

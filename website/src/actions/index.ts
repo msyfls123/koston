@@ -6,6 +6,7 @@ import { product } from './product'
 import { news } from './news'
 import { resource } from './resource'
 import { partnership } from './partnership'
+import { support } from './support'
 
 export const server = {
   addPost: defineAction({
@@ -32,4 +33,5 @@ export const server = {
   news,
   resource,
   partnership,
+  support,
 }
