@@ -130,7 +130,8 @@ export const ServicePanel = () => {
     { pageType: PageType.Resources, url: AllRoutes[PageType.Resources], cover: bannerMap.resources?.cropped },
   ], [bannerMap])
   const [selectedPage, setSelectedPage] = useState(PageType.OnlineSupport)
-  const selectedCover = useMemo(() => sections.find(({ pageType }) => pageType === selectedPage)?.cover, [selectedPage])
+  const selectedSection = useMemo(() => sections.find(({ pageType }) => pageType === selectedPage), [selectedPage])
+
   return (
     <div className="flex justify-between mt-3">
       <ul className="space-y-4">
@@ -147,9 +148,13 @@ export const ServicePanel = () => {
           </li>
         ))}
       </ul>
-      <div className="max-w-128 h-49 bg-cover bg-center flex-1" style={{
-        backgroundImage: `url('${selectedCover}')`
-      }} />
+      <a
+        href={selectedSection?.url}
+        className="max-w-128 h-49 bg-cover bg-center flex-1"
+        style={{
+          backgroundImage: `url('${selectedSection?.cover}')`
+        }}
+      />
     </div>
   )
 }
@@ -163,7 +168,8 @@ export const ProfilePanel = () => {
     { pageType: PageType.Careers, url: AllRoutes[PageType.Careers], cover: bannerMap.careers?.cropped },
   ], [bannerMap])
   const [selectedPage, setSelectedPage] = useState(PageType.About)
-  const selectedCover = useMemo(() => sections.find(({ pageType }) => pageType === selectedPage)?.cover, [selectedPage])
+  const selectedSection = useMemo(() => sections.find(({ pageType }) => pageType === selectedPage), [selectedPage])
+
   return (
     <div className="flex justify-between mt-3">
       <ul className="space-y-4">
@@ -180,9 +186,12 @@ export const ProfilePanel = () => {
           </li>
         ))}
       </ul>
-      <div className="max-w-128 h-49 bg-cover bg-center flex-1" style={{
-        backgroundImage: `url('${selectedCover}')`
-      }} />
+      <a
+        href={selectedSection?.url}
+        className="max-w-128 h-49 bg-cover bg-center flex-1" style={{
+          backgroundImage: `url('${selectedSection?.cover}')`
+        }}
+      />
     </div>
   )
 }

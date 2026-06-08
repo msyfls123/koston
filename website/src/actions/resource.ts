@@ -26,7 +26,7 @@ export const resource = {
       limit: z.number(),
     }),
     accept: 'json',
-    handler: async () => {
+    handler: async (input) => {
       const payload = await getPayloadApp()
       return payload.find({
         collection: 'resources',
@@ -34,7 +34,8 @@ export const resource = {
           title: true,
           content: true,
         },
-        pagination: false,
+        page: input.page,
+        limit: input.limit,
       }).then(processContent)
     },
   }),
@@ -60,7 +61,6 @@ export const resource = {
         },
         page: input.page,
         limit: input.limit,
-        pagination: false,
       }).then(processContent)
     },
   }),

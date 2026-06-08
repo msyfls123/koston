@@ -7,24 +7,27 @@
 
 # 路由
 
-- [ ] 静态页面
+- [x] 静态页面
 - [x] 产品
-- [ ] 行业
-- [ ] 新闻
+- [x] 行业
+- [x] 新闻
 
 # 功能
-- [ ] 在线客服（轮询信息）
-- [ ] 在线加盟表单
-- [ ] 产品查询，资源下载查询
+- [x] 在线客服（轮询信息）
+- [x] 在线加盟表单
+- [x] 产品查询，资源下载查询
 
 # UI
 - [x] header
 - [x] footer
-- [x] banner
+- [x] banner 默认图
 - [x] home
 
 # 优化
-- [ ] payload.find 使用 select 裁剪 fields
+- [x] payload.find 使用 select 裁剪 fields
+
+# admin
+- [ ] 替换 support edit view
 
 # 参考资料
 - Mongodb 加密：https://oneuptime.com/blog/post/2026-01-16-docker-mongodb-auth-volumes/view#connecting-to-mongodb

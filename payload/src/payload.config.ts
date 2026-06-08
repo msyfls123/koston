@@ -36,7 +36,12 @@ export default buildConfig({
     },
     timezones: {
       defaultTimezone: 'Asia/Shanghai',
-    }
+    },
+    components: {
+      graphics: {
+        Logo: '@/components/Logo.tsx',
+      },
+    },
   },
   i18n: {
     fallbackLanguage: 'zh',

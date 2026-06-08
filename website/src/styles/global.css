@@ -143,6 +143,10 @@
 }
 
 @layer components {
+  .hover-card {
+    @apply hover:shadow-xl hover:rounded overflow-hidden hover:scale-97 duration-150
+  }
+
   .richtext {
     @apply tracking-wider
   }

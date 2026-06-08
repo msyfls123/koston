@@ -5,6 +5,8 @@ import { config, getStaticUrl, MediaSubDir, getCertainSizeImageName, type Banner
 
 import { BannerPages } from 'payload-app/consts'
 import { NavProvider } from '@/components/context/NavContext'
+import { BannerImages } from '@/lib/image'
+import { getImage } from 'astro:assets'
 
 const payload = await getPayload({ config })
 
@@ -29,10 +31,26 @@ const starProducts = stars.docs.map((item) => ({
   cover: typeof item.cover === 'object' ? getStaticUrl(MediaSubDir.StarProductImages, getCertainSizeImageName(item.cover, 'normal')) : ''
 }))
 
+const bannerImages = await Promise.all(Object.entries(BannerImages).map(([pageType, meta]) => getImage({
+  src: meta,
+  format: 'jpeg',
+}).then(res => ({
+  pageType,
+  meta: res
+}))))
+
 const normalizeBanners = Object.fromEntries(BannerPages.map((pageType) => {
+
+  const backupBanner = bannerImages.find((item) => item.pageType === pageType)
   // @ts-ignore
   const foundBanner = banners[pageType] as BannerImage
-  if (!foundBanner || !foundBanner.filename) return [pageType, null]
+  if (!foundBanner || !foundBanner.filename) return [
+    pageType,
+    {
+      normal: backupBanner?.meta.src,
+      cropped: backupBanner?.meta.src
+    }
+  ]
   const normal = getStaticUrl(MediaSubDir.BannerImages, foundBanner.filename ?? '')
   const cropped = getStaticUrl(MediaSubDir.BannerImages, getCertainSizeImageName(foundBanner, 'cropped'))
   return [

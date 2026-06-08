@@ -1,4 +1,5 @@
 ---
+import { BannerImages } from '@/lib/image';
 import { getBanner, getPayloadApp } from '@/lib/template'
 import { PageNameMap, type PageType } from "payload-app/consts";
 
@@ -13,7 +14,7 @@ const { pageType, fullScreen } = Astro.props
 const payload = await getPayloadApp()
 const banners = await payload.findGlobal({ slug: 'banners'})
 
-const banner = getBanner(banners, pageType)
+const banner = getBanner(banners, pageType) ?? BannerImages[pageType]?.src
 const { cnName, enName } = PageNameMap[pageType]
 ---
 
