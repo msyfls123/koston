@@ -5,9 +5,11 @@ import Layout from "@/layouts/Layout.astro";
 import Banner from "@/components/common/Banner.astro";
 import { PageType } from "payload-app/consts";
 import { Support as SupportComp } from '@/components/react/Support'
+import { getPayloadApp } from "@/lib/template";
 
 const optimizedBackground = await getImage({ src: bgSupport, format: "png" });
-
+const payload = await getPayloadApp()
+const online = await payload.findGlobal({ slug: 'online' })
 
 ---
 <Layout mainClassname="flex-col flex">
@@ -15,6 +17,10 @@ const optimizedBackground = await getImage({ src: bgSupport, format: "png" });
   <div class="w-full bg-cover bg-fixed bg-center flex-1" style={{
     backgroundImage: `url('${optimizedBackground.src}')`
   }}>
-    <SupportComp client:load />
+    <SupportComp
+      client:load
+      hotline={online.hotline ?? ''}
+    />
+    <p class="text-card mx-auto table mt-8 mb-32">人工服务时间：{online.workingTime}</p>
   </div>
 </Layout>
