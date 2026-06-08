@@ -13,12 +13,13 @@ export const Partners: CollectionConfig = {
   labels: label('加盟伙伴'),
   admin: {
     useAsTitle: 'name',
-    group: AdminGroup.Support,
+    group: AdminGroup.Daily,
     defaultColumns: [
       'name',
       'phone',
       'company',
       'note',
+      'progress',
     ]
   },
   fields: [
@@ -74,6 +75,7 @@ export const Partners: CollectionConfig = {
       name: 'progress',
       label: '处理与否',
       type: 'checkbox',
+      defaultValue: false,
     }
   ]
 }

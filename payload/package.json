@@ -33,13 +33,16 @@
     "@payloadcms/plugin-search": "^3.85.0",
     "@payloadcms/richtext-lexical": "3.84.0",
     "@payloadcms/translations": "3.84.0",
+    "@tailwindcss/postcss": "^4.3.0",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.4.11",
     "payload": "3.84.0",
+    "postcss": "^8.5.15",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

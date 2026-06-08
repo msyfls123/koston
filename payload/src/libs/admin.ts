@@ -4,4 +4,5 @@ export enum AdminGroup {
   News = '新闻',
   Config = '配置',
   Pages = '页面',
+  Daily = '每日处理'
 }

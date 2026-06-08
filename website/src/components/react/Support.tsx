@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Users } from "lucide-react"
+import { ListRestart, Loader2, Users } from "lucide-react"
 import type { Support as ISupport } from "payload-app"
 import { SupportTarget } from "payload-app/consts"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
@@ -8,7 +8,7 @@ import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { actions } from "astro:actions"
 
-const THIRTY_SECONDS = 5 * 1000
+const THIRTY_SECONDS = 30 * 1000
 const TEN_MINUTES  = 10 * 60 * 1000
 
 interface ISupportProps {
@@ -29,6 +29,7 @@ export const Support = ({ hotline }: ISupportProps) => {
   ], [support])
 
   const inputEl = useRef<HTMLInputElement>(null)
+  const listEl = useRef<HTMLUListElement>(null)
   const [loading, setLoading] = useState(false)
   const loadingTimerRef = useRef(0)
   const pollTimerRef = useRef(0)
@@ -45,10 +46,18 @@ export const Support = ({ hotline }: ISupportProps) => {
     }
   }, [])
 
+  const reset = useCallback(() => {
+    saveSupportId('')
+    setId(null)
+    setSupport(null)
+    if (inputEl.current) inputEl.current.value = ''
+    window.clearTimeout(pollTimerRef.current)
+  }, [])
+
   const pollSupport = useCallback(() => {
     const idFromLocalStorage = getSupportId()
     if (!idFromLocalStorage) return
-    loadingTimerRef.current = window.setTimeout(() => setLoading(true), 300)
+    loadingTimerRef.current = window.setTimeout(() => setLoading(true), 1000)
 
     actions.support.find({ id: idFromLocalStorage }).then((res) => {
       if (res.data) {
@@ -64,6 +73,11 @@ export const Support = ({ hotline }: ISupportProps) => {
 
   useEffect(() => {
     if (!support) return
+
+    setTimeout(() => listEl.current?.scrollTo?.({
+      behavior: 'smooth',
+      top: 9999
+    }), 100)
   
     window.clearTimeout(pollTimerRef.current)
     const diffs = compareDates(new Date(), new Date(support.updatedAt))
@@ -106,26 +120,43 @@ export const Support = ({ hotline }: ISupportProps) => {
 
   return (
     <div className="mt-32 mx-auto max-w-185 rounded-2xl overflow-hidden bg-white">
-      <div className="h-18 px-8 text-3xl bg-text text-white flex items-center font-light">
-        <Users className="mr-2"/> 在线咨询
+      <div className="h-18 px-8 text-3xl bg-text text-white flex items-center font-light flex">
+        <Users className="mr-4 rounded-full bg-footer text-teal p-0.5 size-9"/>
+        <h2>在线咨询</h2>
+        <Button
+          variant="ghost"
+          onClick={() => {
+            if (window.confirm('确认要重置对话？对话记录将无法恢复')) {
+              reset()
+            }
+          }}
+          title="重置对话"
+          className="ml-auto rounded-full size-8 cursor-pointer"
+        ><ListRestart /></Button>
       </div>
-      <ul className="px-11 pt-10 pb-20 space-y-14 max-h-100 overflow-y-auto">
-        {listWithMock?.map((message) => (
-          <li
-            key={message.id}
-            className={cn(
-              'flex flex-col',
-              message.sender === SupportTarget.Staff ? 'items-start' : 'items-end'
-            )}
-          >
-            <div className="text-xl text-gray">
-              <span className="mr-1">{message.sender === SupportTarget.Staff ? '在线客服' : '我'}</span>
-              {message.time && new Date(message.time).toLocaleString()}
-            </div>
-            <div className="rounded-2xl bg-panel px-5 py-4 mt-4 tracking-wider text-gray">{message.content}</div>
-          </li>
-        ))}
-      </ul>
+      <div className="relative">
+        <ul className="px-11 pt-10 pb-20 space-y-14 max-h-100 overflow-y-auto" ref={listEl}>
+          {listWithMock?.map((message) => (
+            <li
+              key={message.id}
+              className={cn(
+                'flex flex-col',
+                message.sender === SupportTarget.Staff ? 'items-start' : 'items-end'
+              )}
+            >
+              <div className="text-gray">
+                <span className="text-xl mr-2">{message.sender === SupportTarget.Staff ? '在线客服' : '我'}</span>
+                <span className="text-sm text-wall">{message.time && new Date(message.time).toLocaleString()}</span>
+              </div>
+              <div className="rounded-2xl bg-panel px-5 py-4 mt-4 tracking-wider text-gray">{message.content}</div>
+            </li>
+          ))}
+          
+        </ul>
+        {loading && <div className="absolute top-0 left-0 w-full h-full bg-gray/80 flex justify-center items-center">
+          <Loader2 className="animate-spin size-5" />
+        </div>}
+      </div>
 
       <div className="border-t border-t-border px-12 py-4 flex-col w-full">
         <Input

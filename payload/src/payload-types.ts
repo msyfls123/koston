@@ -71,9 +71,9 @@ export interface Config {
     products: Product;
     industries: Industry;
     news: News;
+    supports: Support;
     partners: Partner;
     resources: Resource;
-    supports: Support;
     'star-products': StarProduct;
     'product-categories': ProductCategory;
     'resource-categories': ResourceCategory;
@@ -107,9 +107,9 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     industries: IndustriesSelect<false> | IndustriesSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
+    supports: SupportsSelect<false> | SupportsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     resources: ResourcesSelect<false> | ResourcesSelect<true>;
-    supports: SupportsSelect<false> | SupportsSelect<true>;
     'star-products': StarProductsSelect<false> | StarProductsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'resource-categories': ResourceCategoriesSelect<false> | ResourceCategoriesSelect<true>;
@@ -449,6 +449,28 @@ export interface NewsImage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supports".
+ */
+export interface Support {
+  id: string;
+  created?: string | null;
+  dialogue?:
+    | {
+        sender?: ('customer' | 'staff') | null;
+        time?: string | null;
+        content?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  firstMessage?: string | null;
+  lastMessage?: string | null;
+  needReply?: boolean | null;
+  finished?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "partners".
  */
 export interface Partner {
@@ -508,25 +530,6 @@ export interface ResourceCategory {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "supports".
- */
-export interface Support {
-  id: string;
-  created?: string | null;
-  dialogue?:
-    | {
-        sender?: ('customer' | 'staff') | null;
-        time?: string | null;
-        content?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  finished?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -806,16 +809,16 @@ export interface PayloadLockedDocument {
         value: string | News;
       } | null)
     | ({
+        relationTo: 'supports';
+        value: string | Support;
+      } | null)
+    | ({
         relationTo: 'partners';
         value: string | Partner;
       } | null)
     | ({
         relationTo: 'resources';
         value: string | Resource;
-      } | null)
-    | ({
-        relationTo: 'supports';
-        value: string | Support;
       } | null)
     | ({
         relationTo: 'star-products';
@@ -1014,6 +1017,27 @@ export interface NewsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supports_select".
+ */
+export interface SupportsSelect<T extends boolean = true> {
+  created?: T;
+  dialogue?:
+    | T
+    | {
+        sender?: T;
+        time?: T;
+        content?: T;
+        id?: T;
+      };
+  firstMessage?: T;
+  lastMessage?: T;
+  needReply?: T;
+  finished?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "partners_select".
  */
 export interface PartnersSelect<T extends boolean = true> {
@@ -1037,24 +1061,6 @@ export interface ResourcesSelect<T extends boolean = true> {
   title?: T;
   content?: T;
   category?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "supports_select".
- */
-export interface SupportsSelect<T extends boolean = true> {
-  created?: T;
-  dialogue?:
-    | T
-    | {
-        sender?: T;
-        time?: T;
-        content?: T;
-        id?: T;
-      };
-  finished?: T;
   updatedAt?: T;
   createdAt?: T;
 }
