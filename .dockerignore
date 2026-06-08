@@ -8,3 +8,5 @@ deploy-website/
 upload/
 dist/
 store/
+
+.git/

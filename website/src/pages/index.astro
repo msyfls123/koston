@@ -25,9 +25,7 @@ const banner = getBanner(banners, PageType.Home) ?? BannerImages[PageType.Home]!
 <Layout>
   <article class="text-text">
     <!-- banner -->
-    <div class="relative w-full h-120 bg-border" style={{
-      backgroundImage: `url('${banner}')`
-    }}>
+    <div class="relative w-full h-120 bg-border">
       <!-- @ts-ignore --> 
       <Image src={banner} {...{}} class="w-full h-full absolute top-0 left-0 saturate-90" alt="home banner"/>
       <div class="absolute z-20 left-30 top-26 text-white">
