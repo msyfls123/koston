@@ -11,7 +11,7 @@ services:
   payload:
     build: ./payload
     ports:
-      - "3000:3000"
+      - "6300:3000"
     volumes:
       - ./payload/upload:/app/upload
     environment:
@@ -21,7 +21,7 @@ services:
   website:
     build: ./
     ports:
-      - "4321:4321"
+      - "6321:4321"
     volumes:
       - astro-static:/app/dist/client
     environment:
@@ -34,6 +34,12 @@ services:
       - ./nginx/conf:/etc/nginx/conf.d
       - astro-static:/app/astro
       - ./payload/upload:/app/upload
+    ports:
+      - '6080:80'
+  web-proxy:
+    image: nginx:stable-alpine3.23-perl
+    volumes:
+      - ./nginx/conf-proxy:/etc/nginx/conf.d
     ports:
       - '80:80'
 volumes:
