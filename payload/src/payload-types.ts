@@ -88,7 +88,6 @@ export interface Config {
     'news-images': NewsImage;
     'product-images': ProductImage;
     'resource-files': ResourceFile;
-    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -124,7 +123,6 @@ export interface Config {
     'news-images': NewsImagesSelect<false> | NewsImagesSelect<true>;
     'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
     'resource-files': ResourceFilesSelect<false> | ResourceFilesSelect<true>;
-    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -760,16 +758,6 @@ export interface HomeSectionImage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: string;
-  title: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -875,10 +863,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'resource-files';
         value: string | ResourceFile;
-      } | null)
-    | ({
-        relationTo: 'posts';
-        value: string | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1452,15 +1436,6 @@ export interface ResourceFilesSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts_select".
- */
-export interface PostsSelect<T extends boolean = true> {
-  title?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

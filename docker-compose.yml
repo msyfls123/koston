@@ -1,12 +1,16 @@
 
+version: '3.3'
+
 services:
   mongo:
     image: mongodb/mongodb-community-server:latest
     volumes:
       - ./store/configdb:/data/configdb
       - ./store/db:/data/db
+    env_file:
+      - .env
     ports:
-      - "27017:27017"
+      - "27018:27017"
     user: root
   payload:
     build: ./payload
@@ -15,8 +19,8 @@ services:
     volumes:
       - ./payload/upload:/app/upload
     environment:
-      DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
-      PAYLOAD_SECRET: KIMIMA
+      DATABASE_URL: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@172.17.0.1:27018/${MONGO_DBNAME}?authSource=admin"
+      PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
       IN_DOCKER: 1
   website:
     build: ./
@@ -25,8 +29,8 @@ services:
     volumes:
       - astro-static:/app/dist/client
     environment:
-      DATABASE_URL: mongodb://172.17.0.1:27017/koston-setup
-      PAYLOAD_SECRET: KIMIMA
+      DATABASE_URL: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@172.17.0.1:27018/${MONGO_DBNAME}?authSource=admin"
+      PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
       IN_DOCKER: 1
   web:
     image: nginx:stable-alpine3.23-perl

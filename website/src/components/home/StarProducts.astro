@@ -10,23 +10,25 @@ const starProducts = await payload.find({
 const [first, ...others] = starProducts.docs;
 ---
 
-<a
-  href={`/product/${typeof first.product === "object" ? first.product.id : ""}`}
-  class="flex mt-18 hover-card"
->
-  <div
-    class="w-1/2 h-100 bg-cover bg-center"
-    style={{
-      backgroundImage: `url('${getImageUrl(first.cover, MediaSubDir.StarProductImages, "top")}')`,
-    }}
+{first &&
+  <a
+    href={`/product/${typeof first.product === "object" ? first.product.id : ""}`}
+    class="flex mt-18 hover-card"
   >
-  </div>
-  <div class="w-1/2 px-18 flex flex-col justify-center bg-white">
-    <h2 class="text-3xl font-medium">{first.name}</h2>
-    <p class="font-medium">{first.engName}</p>
-    <div class="text-gray mt-6">{first.description}</div>
-  </div>
-</a>
+    <div
+      class="w-1/2 h-100 bg-cover bg-center"
+      style={{
+        backgroundImage: `url('${getImageUrl(first.cover, MediaSubDir.StarProductImages, "top")}')`,
+      }}
+    >
+    </div>
+    <div class="w-1/2 px-18 flex flex-col justify-center bg-white">
+      <h2 class="text-3xl font-medium">{first.name}</h2>
+      <p class="font-medium">{first.engName}</p>
+      <div class="text-gray mt-6">{first.description}</div>
+    </div>
+  </a>
+}
 
 <ul class="mt-15 flex justify-between space-x-14">
   {
