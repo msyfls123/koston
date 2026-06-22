@@ -148,7 +148,10 @@ export const Support = ({ hotline }: ISupportProps) => {
                 <span className="text-xl mr-2">{message.sender === SupportTarget.Staff ? '在线客服' : '我'}</span>
                 <span className="text-sm text-wall">{message.time && new Date(message.time).toLocaleString()}</span>
               </div>
-              <div className="rounded-2xl bg-panel px-5 py-4 mt-4 tracking-wider text-gray">{message.content}</div>
+              <div className={cn(
+                "rounded-2xl px-5 py-4 mt-4 tracking-wider",
+                message.sender === SupportTarget.Customer ? 'bg-green-500 text-text' : 'bg-panel text-gray'
+              )}>{message.content}</div>
             </li>
           ))}
           
