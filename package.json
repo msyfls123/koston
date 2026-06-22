@@ -1,10 +1,10 @@
 {
-  "name": "remix-payload-monorepo",
+  "name": "koston-monorepo",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "license": "ISC",
-  "author": "",
+  "author": "kimima",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently -p \"[{name}]\" -c \"green.bold,magenta.bold\" -n \"PAYLOAD,WEBSITE\" \"pnpm run dev:payload\" \"pnpm run dev:website\"",
