@@ -43,7 +43,10 @@ const banner = getBanner(banners, PageType.Home) ?? BannerImages[PageType.Home]!
           <h2 class="text-3xl font-medium">明星产品</h2>
           <p class="font-medium">Star Products</p>
         </div>
-        <a href={getRoute(PageType.StarProducts)} class="bg-text text-white h-10 px-8 leading-10">查看更多</a>
+        <a href={getRoute(PageType.StarProducts)} class="bg-text text-white h-10 pl-8 pr-4 hover:pl-7 hover:pr-5 duration-150 leading-10 group/section flex items-center">
+          查看更多
+          <span class="opacity-0 duration-150 group-hover/section:opacity-100 ml-1">＞</span>
+        </a>
       </div>
       <HomeStarProducts />
      </div>
@@ -54,7 +57,10 @@ const banner = getBanner(banners, PageType.Home) ?? BannerImages[PageType.Home]!
           <h2 class="text-3xl font-medium">重点行业</h2>
           <p class="font-medium">Key Industries</p>
         </div>
-        <a href="/industry/" class="bg-text text-white h-10 px-8 leading-10">查看更多</a>
+        <a href={getRoute(PageType.IndustryCategory)} class="bg-text text-white h-10 pl-8 pr-4 hover:pl-7 hover:pr-5 duration-150 leading-10 group/section flex items-center">
+          查看更多
+          <span class="opacity-0 duration-150 group-hover/section:opacity-100 ml-1">＞</span>
+        </a>
       </div>
       <HomeIndustries />
      </div>
@@ -67,7 +73,10 @@ const banner = getBanner(banners, PageType.Home) ?? BannerImages[PageType.Home]!
             <h2 class="text-3xl font-medium">新闻资讯</h2>
             <p class="font-medium">New information</p>
           </div>
-          <a href="/news/" class="bg-text text-white h-10 px-8 leading-10">查看更多</a>
+          <a href={getRoute(PageType.NewsList)} class="bg-text text-white h-10 pl-8 pr-4 hover:pl-7 hover:pr-5 duration-150 leading-10 group/section flex items-center">
+            查看更多
+            <span class="opacity-0 duration-150 group-hover/section:opacity-100 ml-1">＞</span>
+          </a>
         </div>
         <News />
      </div>

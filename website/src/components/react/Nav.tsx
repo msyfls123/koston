@@ -66,15 +66,15 @@ export const Nav = ({ routePattern }: INavProps) => {
     <header className='sticky top-0 z-50'>
       <div className="relative z-1 bg-panel">
         <div className='mx-auto max-w-320 flex justify-between items-center h-22 px-20'>
-          <div className='flex items-center'>
+          <a className='flex items-center' href="/">
             <img src="/logo.png" className='size-16' />
-          </div>
+          </a>
           <div className='flex justify-between space-x-5 h-full'>
             {HeaderNavs.map((nav) => (
               <nav
                 key={nav.category}
-                className={cn('cursor-pointer flex justify-center items-end h-full px-1', {
-                  'text-[#c90018]': foundCategory === nav.category
+                className={cn('cursor-pointer flex justify-center items-end h-full px-1 hover:font-semibold', {
+                  'text-[#c90018] font-semibold': foundCategory === nav.category
                 })}
                 onPointerEnter={() => {
                   if (nav.category === RouteCategory.Home) return
@@ -103,7 +103,7 @@ export const Nav = ({ routePattern }: INavProps) => {
 
       {selectedNav && <>
         <div
-          className='absolute top-23 bg-white w-full pt-7 pb-16'
+          className='absolute top-22.5 bg-white w-full pt-7 pb-16'
           onPointerEnter={() => {
             handleOpen(selectedNav)
           }}

@@ -88,7 +88,7 @@ export const IndustriesPanel = () => {
       <ul className="grid grid-cols-4 gap-4 mt-5">
         {store.industries.map(item => (
           <li key={item.id} className="w-33 h-20">
-            <a href={getRoute(PageType.IndustryDetail, { id: item.id })} className="w-full h-full rounded bg-center bg-cover relative block" style={{
+            <a href={getRoute(PageType.IndustryDetail, { id: item.id })} className="w-full h-full rounded bg-center bg-cover relative block hover-card" style={{
               backgroundImage: `url('${item.cover}')`
             }}>
               <span className="absolute bottom-2 left-2 text-white text-[10px]">{item.name}</span>
@@ -111,7 +111,7 @@ export const AdvancePanel = () => {
       {sections.map((item) => (
         <a href={item.url} className="flex-1">
           <h2 className="flex items-center text-text text-sm">{PageNameMap[item.pageType].cnName}<MoveRight className="w-5 h-4 ml-2" /></h2>
-          <div className="mt-5 max-w-128 h-49 bg-cover bg-center" style={{
+          <div className="mt-5 max-w-128 h-49 bg-cover bg-center hover-card" style={{
             backgroundImage: `url('${item.cover}')`
           }} />
 
