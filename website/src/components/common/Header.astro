@@ -7,7 +7,9 @@ import { BannerPages } from 'payload-app/consts'
 import { NavProvider } from '@/components/context/NavContext'
 import { BannerImages } from '@/lib/image'
 import { getImage } from 'astro:assets'
+import logo from '@/assets/logo.png'
 
+const logoIcon = await getImage({ src: logo, format: 'png' })
 const payload = await getPayload({ config })
 
 const categories = await payload.find({ collection: 'product-categories', pagination: false })
@@ -67,4 +69,4 @@ const routePattern = Astro.routePattern
   starProducts,
   bannerMap: normalizeBanners
 }}>{}</NavProvider>
-<Nav client:load routePattern={routePattern} />
+<Nav client:load routePattern={routePattern} logoSrc={logoIcon.src} />

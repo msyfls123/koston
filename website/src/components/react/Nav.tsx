@@ -6,6 +6,7 @@ import { AdvancePanel, IndustriesPanel, ProductsPanel, ServicePanel, ProfilePane
 
 interface INavProps {
   routePattern: string
+  logoSrc: string
 }
 
 const NavPanelMap: Record<RouteCategory, React.ComponentType> = {
@@ -17,7 +18,7 @@ const NavPanelMap: Record<RouteCategory, React.ComponentType> = {
   [RouteCategory.Profile]: ProfilePanel,
 }
 
-export const Nav = ({ routePattern }: INavProps) => {
+export const Nav = ({ routePattern, logoSrc }: INavProps) => {
   const foundCategory = useMemo(() => findRouteCategory(routePattern), [routePattern])
   const [selectedNav, setSelectedNav] = useState<RouteCategory | null>(null)
   const forceOpen = useRef(false)
@@ -67,7 +68,7 @@ export const Nav = ({ routePattern }: INavProps) => {
       <div className="relative z-1 bg-panel">
         <div className='mx-auto max-w-320 flex justify-between items-center h-22 px-20'>
           <a className='flex items-center' href="/">
-            <img src="/logo.png" className='size-16' />
+            <img src={logoSrc} className='size-16' />
           </a>
           <div className='flex justify-between space-x-5 h-full'>
             {HeaderNavs.map((nav) => (

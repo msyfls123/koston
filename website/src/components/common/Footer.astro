@@ -1,26 +1,37 @@
 ---
 import { getPayload } from 'payload'
 import { config } from 'payload-app'
+import { getImage, Image } from "astro:assets";
+import wechat from '@/assets/social/wechat.svg'
+import weibo from '@/assets/social/weibo.svg'
+import douyin from '@/assets/social/douyin.svg'
+import xiaohongshu from '@/assets/social/xiaohongshu.svg'
+import logo from '@/assets/logo.png'
 
 const payload = await getPayload({ config })
 const onlineConfig = await payload.findGlobal({ slug: 'online'})
 const email = 'koston@163.com'
 
+const wechatIcon = await getImage({ src: wechat, format: 'svg' })
+const weiboIcon = await getImage({ src: weibo, format: 'svg' })
+const douyinIcon = await getImage({ src: douyin, format: 'svg' })
+const xiaohongshuIcon = await getImage({ src: xiaohongshu, format: 'svg' })
+
 const socialLinks = [
   {
-    icon: '/images/wechat.svg',
-    qrcode: '/images/wechat.svg'
+    icon: wechatIcon.src,
+    qrcode: wechatIcon.src,
   },
   {
-    icon: '/images/weibo.svg',
+    icon: weiboIcon.src,
     link: 'https://weibo.com',
   },
   {
-    icon: '/images/douyin.svg',
+    icon: douyinIcon.src,
     link: 'https://douyin.com',
   },
   {
-    icon: '/images/xiaohongshu.svg',
+    icon: xiaohongshuIcon.src,
     link: 'https://xiaohongshu.com',
   },
 ]
@@ -28,7 +39,7 @@ const socialLinks = [
 
 <footer class="bg-footer mt-auto">
   <div class="mx-auto max-w-320 px-20 pt-18 pb-6">
-    <img src="/logo.png" class='size-30 bg-slate-100' />
+    <Image src={logo} alt="logo" width={120} height={120} class='size-30 bg-slate-100' />
     <div class="mt-18 flex flex-start space-x-24 text-text ">
       <div class="space-y-1">
         <h2 class="text-sm font-bold">上海总部</h2>
