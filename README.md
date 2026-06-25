@@ -22,6 +22,7 @@
   docker compose build website
   ```
 - 通过 `docker compose up -d` 启动（你可能需要修改 docker-compose.yml 来增减 nginx image）
+- `docker compose down -v` 将删除命名卷
 
 # 参考资料
 - Mongodb 加密：https://oneuptime.com/blog/post/2026-01-16-docker-mongodb-auth-volumes/view#connecting-to-mongodb
