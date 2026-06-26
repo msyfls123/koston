@@ -14,7 +14,7 @@
 - 确保目标机器上有 Docker 且 docker compose 不低于 3.3
 - 将 git 目录打包成 zip `git archive --format=zip --output={filename}.zip HEAD`
 - 将 zip 文件 scp 到目标机器上 `scp {filename}.zip root@ebichu.cc:/opt/koston`
-- 登录目标机器，将 zip 解压到当前目录 `unzip -o {filename}.zip -d .`
+- 登录目标机器，将 zip 解压到当前目录 `unzip -o {filename}.zip -d ./koston`
 - 参考根目录下 `.env.example` 文件新增 `.env` 文件
 - 用 docker compose 重新构建
   ```
