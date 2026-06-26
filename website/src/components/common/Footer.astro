@@ -1,46 +1,48 @@
 ---
-import { getPayload } from 'payload'
-import { config } from 'payload-app'
+import { getPayload } from "payload";
+import { config, MediaSubDir } from "payload-app";
 import { getImage, Image } from "astro:assets";
-import wechat from '@/assets/social/wechat.svg'
-import weibo from '@/assets/social/weibo.svg'
-import douyin from '@/assets/social/douyin.svg'
-import xiaohongshu from '@/assets/social/xiaohongshu.svg'
-import logo from '@/assets/logo.png'
+import wechat from "@/assets/social/wechat.svg";
+import weibo from "@/assets/social/weibo.svg";
+import douyin from "@/assets/social/douyin.svg";
+import xiaohongshu from "@/assets/social/xiaohongshu.svg";
+import logo from "@/assets/logo.png";
+import beian from "@/assets/beian.png";
+import { getImageUrl } from "@/lib/template";
 
-const payload = await getPayload({ config })
-const onlineConfig = await payload.findGlobal({ slug: 'online'})
-const email = 'koston@163.com'
+const payload = await getPayload({ config });
+const onlineConfig = await payload.findGlobal({ slug: "online" });
+const email = "koston@163.com";
 
-const wechatIcon = await getImage({ src: wechat, format: 'svg' })
-const weiboIcon = await getImage({ src: weibo, format: 'svg' })
-const douyinIcon = await getImage({ src: douyin, format: 'svg' })
-const xiaohongshuIcon = await getImage({ src: xiaohongshu, format: 'svg' })
+const wechatIcon = await getImage({ src: wechat, format: "svg" });
+const weiboIcon = await getImage({ src: weibo, format: "svg" });
+const douyinIcon = await getImage({ src: douyin, format: "svg" });
+const xiaohongshuIcon = await getImage({ src: xiaohongshu, format: "svg" });
 
 const socialLinks = [
   {
     icon: wechatIcon.src,
-    qrcode: wechatIcon.src,
+    qrcode: getImageUrl(onlineConfig.weixin, MediaSubDir.WechatImage, 'cropped') || wechatIcon.src,
   },
   {
     icon: weiboIcon.src,
-    link: 'https://weibo.com',
+    link: onlineConfig.weibo,
   },
   {
     icon: douyinIcon.src,
-    link: 'https://douyin.com',
+    link: onlineConfig.douyin,
   },
   {
     icon: xiaohongshuIcon.src,
-    link: 'https://xiaohongshu.com',
+    link: onlineConfig.xiaohongshu,
   },
-]
+];
 ---
 
 <footer class="bg-footer mt-auto">
   <div class="mx-auto max-w-320 px-20 pt-18 pb-6">
-    <Image src={logo} alt="logo" width={120} height={120} class='size-30 bg-slate-100' />
-    <div class="mt-18 flex flex-start space-x-24 text-text ">
+    <Image src={logo} alt="logo" width={120} height={120} class="size-30" />
+    <div class="mt-18 flex flex-start space-x-24 text-text">
       <div class="space-y-1">
         <h2 class="text-sm font-bold">上海总部</h2>
         <p class="text-xs">上海市嘉定区马陆镇浏翔公路2150号</p>
@@ -48,58 +50,76 @@ const socialLinks = [
       </div>
       <div class="space-y-1">
         <h2 class="text-sm font-bold">联系我们</h2>
-        <p class="text-xs">服务热线：<a href=`tel:${onlineConfig.hotline}`>{onlineConfig.hotline}</a></p>
+        <p class="text-xs">
+          服务热线：<a href=`tel:${onlineConfig.hotline}`
+            >{onlineConfig.hotline}</a>
+        </p>
         <p class="text-xs">邮箱：<a href=`mailto:${email}`>{email}</a></p>
       </div>
       <div class="space-y-1 flex-none">
         <h2 class="text-sm font-bold">购买渠道</h2>
         <p class="text-xs flex items-center leading-0 mt-1.5">
-          <a href={onlineConfig.link1688} target="_blank">
-            1688
-          </a>
-          <span class="before:inline-block before:bg-text before:w-px before:h-3 mx-3"/>
-          <a href={onlineConfig.linkQianniu} target="_blank">
-            千牛
-          </a>
+          <a href={onlineConfig.link1688} target="_blank"> 1688 </a>
+          <span
+            class="before:inline-block before:bg-text before:w-px before:h-3 mx-3"
+          ></span>
+          <a href={onlineConfig.linkQianniu} target="_blank"> 千牛 </a>
         </p>
       </div>
       <div class="space-y-1 ml-auto">
         <h2 class="text-sm font-bold">订阅我们，获取最新动态</h2>
         <ul class="flex space-x-4 mt-4">
-          {socialLinks.map(({ icon, link, qrcode}) => (
-            <li>
-              <div class="relative size-9 bg-contain group/social" style={{
-                backgroundImage: `url(${icon})`
-              }}>
-                {qrcode && <div
-                  class="absolute size-25 bottom-20 bg-amber-300/35 bg-contain hidden group-hover/social:block"
+          {
+            socialLinks.map(({ icon, link, qrcode }) => (
+              <li>
+                <div
+                  class="relative size-9 bg-contain group/social"
                   style={{
-                    backgroundImage: `url(${qrcode})`
+                    backgroundImage: `url(${icon})`,
                   }}
-                ></div>}
-                {link && <a
-                  href={link}
-                  target="_blank"
-                  class="w-full h-full block"
-                ></a>}
-              </div>
-            </li>
-          ))}
+                >
+                  {qrcode && (
+                    <div
+                      class="absolute size-25 bottom-20 bg-white/35 bg-contain hidden group-hover/social:block"
+                      style={{
+                        backgroundImage: `url(${qrcode})`,
+                      }}
+                    />
+                  )}
+                  {link && (
+                    <a
+                      href={link}
+                      target="_blank"
+                      class="w-full h-full block"
+                    />
+                  )}
+                </div>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
   </div>
   <div class="bg-panel py-6">
-    <div class="mx-auto max-w-320 px-20 flex justify-between text-sm items-center">
-      <span>
-        © 版权所有：壳盾新材料科技有限公司
-      </span>
+    <div
+      class="mx-auto max-w-320 px-20 flex justify-between text-sm items-center"
+    >
+      <span> © 版权所有：壳盾新材料科技有限公司 </span>
       <a href="https://beian.miit.gov.cn/" target="_blank">
         沪ICP备10928739号-1
       </a>
       <span class="flex space-x-1">
-        <img src="https://inews.gtimg.com/newsapp_bt/0/0613150938895_706/0" class="icon">
-        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030002000001" target="_blank" rel="nofollow" dt-imp-once="true" dt-eid="em_bottom_outer_chain" dt-params="chain_name=粤公网安备 44030002000001号&amp;dt_element_path=['em_bottom_outer_chain']" class="link-item">粤公网安备 44030002000001号</a>
+        <Image src={beian} width={20} height={20} alt="备案"/>
+          <a
+            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=联网备案中"
+            target="_blank"
+            rel="nofollow"
+            dt-imp-once="true"
+            dt-eid="em_bottom_outer_chain"
+            dt-params="chain_name=联网备案中&dt_element_path=['em_bottom_outer_chain']"
+            class="link-item">联网备案中</a
+          >
       </span>
     </div>
   </div>

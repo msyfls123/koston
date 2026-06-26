@@ -87,6 +87,7 @@ export interface Config {
     'home-section-images': HomeSectionImage;
     'news-images': NewsImage;
     'product-images': ProductImage;
+    'wechat-image': WechatImage;
     'resource-files': ResourceFile;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -122,6 +123,7 @@ export interface Config {
     'home-section-images': HomeSectionImagesSelect<false> | HomeSectionImagesSelect<true>;
     'news-images': NewsImagesSelect<false> | NewsImagesSelect<true>;
     'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
+    'wechat-image': WechatImageSelect<false> | WechatImageSelect<true>;
     'resource-files': ResourceFilesSelect<false> | ResourceFilesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -758,6 +760,35 @@ export interface HomeSectionImage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wechat-image".
+ */
+export interface WechatImage {
+  id: string;
+  alt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    cropped?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -859,6 +890,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'product-images';
         value: string | ProductImage;
+      } | null)
+    | ({
+        relationTo: 'wechat-image';
+        value: string | WechatImage;
       } | null)
     | ({
         relationTo: 'resource-files';
@@ -1421,6 +1456,38 @@ export interface ProductImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wechat-image_select".
+ */
+export interface WechatImageSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        cropped?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "resource-files_select".
  */
 export interface ResourceFilesSelect<T extends boolean = true> {
@@ -1697,6 +1764,10 @@ export interface Online {
   link1688?: string | null;
   linkQianniu?: string | null;
   hrEmail?: string | null;
+  weibo?: string | null;
+  douyin?: string | null;
+  xiaohongshu?: string | null;
+  weixin?: (string | null) | WechatImage;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1858,6 +1929,10 @@ export interface OnlineSelect<T extends boolean = true> {
   link1688?: T;
   linkQianniu?: T;
   hrEmail?: T;
+  weibo?: T;
+  douyin?: T;
+  xiaohongshu?: T;
+  weixin?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

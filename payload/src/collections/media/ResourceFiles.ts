@@ -11,6 +11,16 @@ export const ResourceFiles: CollectionConfig = {
     },
     upload: {
         staticDir: getUploadDir(MediaSubDir.ResourceFiles),
+        mimeTypes: [
+          'image/*',
+          'application/pdf',
+          'application/zip',
+          'application/octet-stream',
+          'application/vnd.rar',
+          'application/x-zip-compressed',
+          'application/x-rar-compressed',
+          'multipart/x-zip',
+        ],
     },
     fields: [
         {

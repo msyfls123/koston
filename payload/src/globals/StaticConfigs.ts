@@ -39,7 +39,31 @@ export const StaticConfigs: GlobalConfig[] = [
         label: 'HR 邮箱',
         type: 'text',
         defaultValue: 'kostonhr@163.com'
-      }
+      },
+      {
+        name: 'weibo',
+        label: '微博链接',
+        type: 'text',
+        defaultValue: 'https://weibo.com'
+      },
+      {
+        name: 'douyin',
+        label: '抖音链接',
+        type: 'text',
+        defaultValue: 'https://douyin.com'
+      },
+      {
+        name: 'xiaohongshu',
+        label: '微博链接',
+        type: 'text',
+        defaultValue: 'https://xiaohongshu.com'
+      },
+      {
+        name: 'weixin',
+        label: '微信公众号',
+        type: 'upload',
+        relationTo: 'wechat-image',
+      },
     ]
   },
   {

@@ -68,7 +68,7 @@ export const Nav = ({ routePattern, logoSrc }: INavProps) => {
       <div className="relative z-1 bg-panel">
         <div className='mx-auto max-w-320 flex justify-between items-center h-22 px-20'>
           <a className='flex items-center' href="/">
-            <img src={logoSrc} className='size-16' />
+            <img src={logoSrc} className='w-24 h-12' />
           </a>
           <div className='flex justify-between space-x-5 h-full'>
             {HeaderNavs.map((nav) => (

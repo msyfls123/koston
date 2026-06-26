@@ -11,7 +11,7 @@ import { Users } from './collections/Users'
 import { Products } from './collections/Products'
 import { Industries } from './collections/Industries'
 
-import { AwardImages, BannerImages, HomeSectionImages, HonorBanner, IndustryImages, NewsImages, ProductImages, ResourceFiles, RichTextImages, StarProductImages } from './collections/media/index'
+import { AwardImages, BannerImages, HomeSectionImages, HonorBanner, IndustryImages, NewsImages, ProductImages, ResourceFiles, RichTextImages, StarProductImages, WechatImage } from './collections/media/index'
 import { StaticPages } from './globals/StaticPages'
 import { TimelineImages } from './collections/media/TimelineImages'
 import { StaticConfigs } from './globals/StaticConfigs'
@@ -76,6 +76,7 @@ export default buildConfig({
     HomeSectionImages,
     NewsImages,
     ProductImages,
+    WechatImage,
     /** files **/
     ResourceFiles,
   ],
